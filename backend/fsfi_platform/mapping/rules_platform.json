@@ -1,0 +1,10 @@
+{
+ "note": "Platform additions to the generic rule set, in the withheld-stage formats of rules_generic.json. The generic phrase rules have no pathway to IND-22, IND-28 or IND-36; these sub-programme rules give one. They fire only when no phrase rule fires on the line text (stage SUB comes after DICT and LATE).",
+ "PRE": [],
+ "SUB": [
+  {"id": "P-S-DIET", "target": "IND-22", "pattern": "\\bdietary\\b|\\bdiet diversity\\b|\\bnutrition education\\b"},
+  {"id": "P-S-MOBILE", "target": "IND-28", "pattern": "\\bmobile (money|finance|banking|payments?)\\b"},
+  {"id": "P-S-WATEREFF", "target": "IND-36", "pattern": "\\bwater (use )?efficiency\\b|\\bwater productivity\\b"}
+ ],
+ "AGY": {}
+}

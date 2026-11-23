@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Design tokens (design brief §5.1). Every text/background pair below
+   was checked with the WCAG relative-luminance formula; see DESIGN.md.
+   ------------------------------------------------------------------ */
+:root {
+  /* surfaces */
+  --paper: #fbf8f2;
+  --ivory: #f6f1e7;
+  --surface: #ffffff;
+
+  /* text */
+  --ink: #1f2a27;
+  --ink-muted: #4a5a55;
+  --ink-subtle: #5c6b66;
+
+  /* brand */
+  --evergreen: #0f3d33;
+  --saffron-bright: #c9a227; /* decorative tone: only on evergreen */
+  --saffron: #9a7814; /* chart-mark tone: 3.68:1 on ivory; legacy chart code uses this name */
+  --saffron-12: #f8f0d8; /* highlight fill behind ink text */
+  --saffron-20: #f1e5c1;
+  --saffron-ink: #7a5f0e; /* saffron-family text on light */
+  --saffron-mark: #9a7814; /* saffron chart marks on light */
+  --green-700: #2c5b4d;
+  --green-500: #5f8476;
+  --neutral-mark: #7f8c88;
+  --alert: #b8461f;
+
+  /* rules */
+  --rule: #e6ddcb;
+  --rule-strong: #8c8574;
+  --focus: #0f3d33;
+
+  /* compatibility aliases used by the chart code */
+  --canvas: var(--paper);
+  --line: var(--rule);
+  --line-strong: var(--rule-strong);
+  --ink-4: color-mix(in srgb, var(--ink) 4%, var(--paper));
+  --ink-6: color-mix(in srgb, var(--ink) 6%, var(--paper));
+  --ink-8: color-mix(in srgb, var(--ink) 8%, var(--paper));
+  --ink-10: color-mix(in srgb, var(--ink) 10%, var(--paper));
+  --ink-16: color-mix(in srgb, var(--ink) 16%, var(--paper));
+  --ink-20: color-mix(in srgb, var(--ink) 20%, var(--paper));
+  --ink-25: color-mix(in srgb, var(--ink) 25%, var(--paper));
+  --ink-40: color-mix(in srgb, var(--ink) 40%, var(--paper));
+  --ink-55: var(--ink-subtle);
+  --ink-70: var(--ink-muted);
+  --ink-78: var(--ink-muted);
+  --ink-85: color-mix(in srgb, var(--ink) 85%, var(--paper));
+
+  /* stress classes and diagnosis (four steps, each mark >= 3:1 on paper) */
+  --stress-low: var(--neutral-mark);
+  --stress-medium: var(--green-500);
+  --stress-high: var(--evergreen);
+  --stress-critical: var(--alert);
+  --dx-at_benchmark: var(--neutral-mark);
+  --dx-partially_funded_gap: var(--green-500);
+  --dx-funded_gap: var(--evergreen);
+  --dx-unfunded_gap: var(--alert);
+
+  /* single elevation, for popovers, menus and dialogs only */
+  --elevation: 0 1px 2px rgb(15 61 51 / 0.08), 0 8px 24px rgb(15 61 51 / 0.12);
+
+  color-scheme: light;
+}
+
+@theme {
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 4px;
+  --radius-2xl: 4px;
+  --radius-3xl: 4px;
+  --shadow-2xs: none;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: var(--elevation);
+  --shadow-xl: var(--elevation);
+  --shadow-2xl: var(--elevation);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ivory: var(--ivory);
+  --color-surface: var(--surface);
+  --color-canvas: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-muted: var(--ink-muted);
+  --color-evergreen: var(--evergreen);
+  --color-saffron: var(--saffron);
+  --color-saffron-bright: var(--saffron-bright);
+  --color-saffron-12: var(--saffron-12);
+  --color-saffron-20: var(--saffron-20);
+  --color-saffron-ink: var(--saffron-ink);
+  --color-saffron-mark: var(--saffron-mark);
+  --color-green-700: var(--green-700);
+  --color-green-500: var(--green-500);
+  --color-neutral-mark: var(--neutral-mark);
+  --color-alert: var(--alert);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-line: var(--rule);
+  --color-line-strong: var(--rule-strong);
+  --color-ink-4: var(--ink-4);
+  --color-ink-6: var(--ink-6);
+  --color-ink-8: var(--ink-8);
+  --color-ink-10: var(--ink-10);
+  --color-ink-16: var(--ink-16);
+  --color-ink-20: var(--ink-20);
+  --color-ink-25: var(--ink-25);
+  --color-ink-40: var(--ink-40);
+  --color-ink-55: var(--ink-55);
+  --color-ink-70: var(--ink-70);
+  --color-ink-78: var(--ink-78);
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-display: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-card: 4px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 5rem; /* sticky header never covers a focused target (SC 2.4.11) */
+    scroll-padding-bottom: 4.5rem; /* nor the sticky draft-scoring footer */
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+  }
+  ::selection {
+    background: var(--saffron-20);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--paper);
+  }
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    outline-color: var(--saffron-bright);
+    box-shadow: none;
+  }
+  h1, h2 {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    font-weight: 500;
+    color: var(--evergreen);
+    letter-spacing: -0.005em;
+  }
+  h3, h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  * {
+    border-color: var(--rule);
+  }
+  table {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+@layer components {
+  /* type scale (brief §5.3) */
+  .t-display { font-family: var(--font-serif); font-size: 2.25rem; line-height: 2.75rem; font-weight: 500; }
+  .t-h1 { font-family: var(--font-serif); font-size: 1.875rem; line-height: 2.375rem; font-weight: 500; }
+  .t-h2 { font-family: var(--font-serif); font-size: 1.5rem; line-height: 2rem; font-weight: 500; }
+  @media (min-width: 768px) {
+    .t-display { font-size: 3rem; line-height: 3.5rem; }
+    .t-h1 { font-size: 2.25rem; line-height: 2.75rem; }
+    .t-h2 { font-size: 1.75rem; line-height: 2.25rem; }
+  }
+  .t-h3 { font-size: 1.375rem; line-height: 1.875rem; font-weight: 600; }
+  .t-h4 { font-size: 1.125rem; line-height: 1.625rem; font-weight: 600; }
+  .t-lead { font-size: 1.125rem; line-height: 1.875rem; }
+  .t-ui { font-size: 0.875rem; line-height: 1.25rem; }
+  .t-caption { font-size: 0.8125rem; line-height: 1.125rem; }
+  .t-micro { font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.02em; }
+
+  .prose-measure { max-width: 68ch; }
+  .prose-measure p + p { margin-top: 1rem; }
+
+  .link {
+    color: var(--green-700);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+  .link:hover { color: var(--evergreen); text-decoration-thickness: 2px; }
+
+  /* Callout: a left rule, not a filled box */
+  .callout { border-left: 3px solid var(--evergreen); padding: 0.25rem 0 0.25rem 1rem; }
+  .callout-caution { border-left-color: var(--alert); }
+}
+
+@layer utilities {
+  .tabular { font-variant-numeric: tabular-nums lining-nums; }
+  .display-num {
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums lining-nums;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    color: var(--ink-subtle);
+  }
+  .skeleton { background: var(--ink-8); }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+  .print-only { display: none; }
+}
+
+/* Recharts: recessive axes and grid */
+.recharts-cartesian-grid line { stroke: var(--rule); }
+.recharts-cartesian-axis-tick-value { fill: var(--ink-subtle); font-size: 12px; font-variant-numeric: tabular-nums; }
+.recharts-cartesian-axis-line, .recharts-cartesian-axis-tick-line { stroke: var(--rule-strong); }
+.recharts-label { fill: var(--ink-subtle); font-size: 12px; }
+.recharts-tooltip-cursor { stroke: var(--rule-strong); }
+.recharts-surface:focus, .recharts-wrapper:focus { outline: none; }
+.recharts-wrapper:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ------------------------------------------------------------------
+   Print (brief §2.8): no navigation or controls, white page, 11 pt serif
+   body, charts at full column width, a break before each major section,
+   URL and access date at the foot of every page.
+   ------------------------------------------------------------------ */
+@media print {
+  @page { margin: 18mm 16mm 22mm; }
+  :root { --paper: #ffffff; --ivory: #ffffff; }
+  html, body { background: #fff !important; }
+  body { font-family: var(--font-serif); font-size: 11pt; line-height: 1.45; color: #000; }
+  .print-hide, header[data-site-header], footer[data-site-footer], nav, [data-print-hide], button, [role="tablist"], select, input { display: none !important; }
+  .print-only { display: block !important; }
+  main { padding: 0 !important; }
+  .max-w-\[1440px\], .max-w-\[1120px\] { max-width: none !important; padding: 0 !important; }
+  section[data-major] { break-before: page; }
+  section[data-major]:first-of-type { break-before: auto; }
+  figure, table, .recharts-wrapper { break-inside: avoid; }
+  [data-figure] { width: 100% !important; border: 0 !important; }
+  a { color: #000; text-decoration: none; }
+  .print-footer {
+    display: block !important;
+    position: fixed;
+    bottom: -14mm;
+    left: 0;
+    right: 0;
+    font-family: var(--font-sans);
+    font-size: 8pt;
+    color: #333;
+    border-top: 0.5pt solid #999;
+    padding-top: 2mm;
+  }
+}
+.print-footer { display: none; }

@@ -1,0 +1,9 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+numpy>=2.0
+scipy>=1.13
+pydantic>=2.7
+python-multipart>=0.0.9
+pytest>=8.0
+httpx>=0.27
+# optional: the prebuilt fsfi_engine wheel (Rust engine, cp313 win_amd64); see README.md for how to install it

@@ -1,0 +1,28 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs and local state
+*.log
+backend/READY
+.env
+.env.*
+!.env.example
+
+# Internal build notes (not part of the public platform)
+PLATFORM_SPEC.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

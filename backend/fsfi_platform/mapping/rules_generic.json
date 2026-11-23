@@ -1,0 +1,380 @@
+{
+ "schema": {
+  "rule": "id, target, pattern. The pattern is a regular expression applied to the normalised text of the line (lower case, every non-alphanumeric character replaced by a space).",
+  "targets": "IND-xx assigns the line to that indicator. NP marks a line with no first-order pathway to any indicator; it stays in the envelope and is placed by the residual stage. OH marks overhead, which is apportioned pro rata to the money of the same agency's other lines in the same sub-programme and year, then agency and year, then agency.",
+  "order": "A line is assigned by the first rule that fires. Stages are tried in the order given; rules within a stage in list order.",
+  "withheld_stages": {
+   "PRE": "overrides keyed on agency codes and named facilities",
+   "SUB": "rules on words of sub-programme names",
+   "AGY": "agency code to indicator"
+  },
+  "withheld_rule_format": {
+   "PRE": "id, target, pattern, optional set of agency codes, optional sub-programme pattern",
+   "SUB": "id, target, pattern on the normalised sub-programme name",
+   "AGY": "agency code: id, target"
+  }
+ },
+ "order": [
+  "PRE",
+  "OHS",
+  "DICT_ROADS",
+  "DICT",
+  "LATE",
+  "SUB",
+  "AGY",
+  "RES"
+ ],
+ "stages": {
+  "OHS": [
+   {
+    "id": "OHS-PAY",
+    "target": "OH",
+    "pattern": "\\bsalar(y|ies)\\b|\\bwages?\\b|\\bremunerat|\\bstaff (salar|benefit|paid)|\\bemployees?\\b.*\\b(paid|remunerat)"
+   },
+   {
+    "id": "OHS-HR",
+    "target": "OH",
+    "pattern": "\\bhuman resources?\\b(?! for health)|\\bhr\\b|\\brecruit|\\bstaff (capacity|development|welfare)\\b"
+   },
+   {
+    "id": "OHS-AUDIT",
+    "target": "OH",
+    "pattern": "\\binternal audits?\\b|\\baudit reports?\\b"
+   },
+   {
+    "id": "OHS-ARREARS",
+    "target": "OH",
+    "pattern": "\\barrears\\b"
+   }
+  ],
+  "DICT_ROADS": [
+   {
+    "id": "D16-TRANSPORT",
+    "target": "IND-16",
+    "pattern": "\\broads?\\b|\\bbridges?\\b|\\bfoot ?bridges?\\b|\\bculverts?\\b|\\btransport (infrastructures?|infrastructure)\\b|\\bports?\\b|\\bboats?\\b|\\bborder (infrastructure|facilities)\\b|\\broad network\\b"
+   }
+  ],
+  "DICT": [
+   {
+    "id": "NP-ENERGY",
+    "target": "NP",
+    "pattern": "\\belectri|\\bgrid\\b|\\bsubstations?\\b|\\btransmission (line|network)|\\bpower ?plants?\\b|\\bhydro ?power\\b|\\bdistribution (network|lines?)\\b|\\btransformers?\\b|\\benergy access\\b|\\bpower supply\\b|\\bgenerators?\\b|\\bswitching\\b"
+   },
+   {
+    "id": "NP-FUEL",
+    "target": "NP",
+    "pattern": "\\bpetroleum\\b|\\bfuel\\b"
+   },
+   {
+    "id": "NP-WASTE",
+    "target": "NP",
+    "pattern": "\\blandfills?\\b|\\bmedical waste\\b|\\bhealthcare waste\\b|\\bhazardous waste\\b|\\bsolid waste\\b|\\bwaste management\\b|\\bcircular economy\\b|\\bpollution\\b"
+   },
+   {
+    "id": "NP-ICT",
+    "target": "NP",
+    "pattern": "\\bict\\b|\\bdigital\\b|\\binternet\\b|\\bfib(er|re)\\b|\\bbroadband\\b|\\be services\\b|\\bmanagement information systems?\\b|\\bmis\\b|\\binnovation (policy|ecosystem)\\b"
+   },
+   {
+    "id": "NP-CHILDPROT",
+    "target": "NP",
+    "pattern": "\\bchild (abuse|rights|protection)\\b"
+   },
+   {
+    "id": "D02-IRRIG",
+    "target": "IND-02",
+    "pattern": "\\birrigat|\\bdams? and (irrigation|canals)\\b"
+   },
+   {
+    "id": "D03-FERT",
+    "target": "IND-03",
+    "pattern": "\\bfertili[sz]|\\blime\\b|\\bliming\\b|\\bcompost\\b|\\bsoil fertility\\b(?!.*\\bmap)|\\bsoil (acidity|amendments?)\\b|\\bnpk\\b|\\burea\\b"
+   },
+   {
+    "id": "D04-SEED",
+    "target": "IND-04",
+    "pattern": "\\bseeds?\\b|\\bseed (potato|system|industry|multiplication)|\\bplanting materials?\\b|\\bcuttings\\b|\\bvines\\b"
+   },
+   {
+    "id": "D05-DIVERS",
+    "target": "IND-05",
+    "pattern": "\\bcrop diversif|\\bhorticultur(?!.*export)|\\bvegetables?\\b|^(?!.*\\bforest).*\\bfruits?\\b"
+   },
+   {
+    "id": "D20-CHILDNUT",
+    "target": "IND-20",
+    "pattern": "\\bstunting\\b|\\bmalnutrition\\b|\\bmalnourish|\\bundernutrition\\b|\\bmicronutrient|\\bfortified\\b|\\bfood supplements?\\b|\\bsupplementary feeding\\b|\\bbreastfeed|\\bgrowth monitoring\\b|\\bchild feeding\\b|\\bnutrition sensitive\\b(?!.*\\bagricultur)"
+   },
+   {
+    "id": "D20-WASH",
+    "target": "IND-20",
+    "pattern": "\\bdrinking water\\b|\\bclean water\\b|\\bpotable\\b|\\bboreholes?\\b|\\bsanitation\\b|\\blatrines?\\b|\\btoilets?\\b|\\bsewerage\\b|\\bf(a)?ecal sludge\\b|\\bwastewater\\b|\\bhygiene\\b"
+   },
+   {
+    "id": "D20-HINS",
+    "target": "IND-20",
+    "pattern": "^(?!.*\\b(chickens?|pigs?|livestock|animals?|crops?)\\b).*(\\bhealth (insurance|financing)\\b)"
+   },
+   {
+    "id": "D25-CREDIT",
+    "target": "IND-25",
+    "pattern": "\\bcredits?\\b|\\bloans?\\b|\\bguarantee\\b|\\baccess (to )?finance\\b|\\bfinancial (inclusion|services)\\b|\\bmicrofinance\\b|\\bleasing\\b|\\basset finance\\b|\\bmatching grants?\\b|\\brevolving fund\\b"
+   },
+   {
+    "id": "D21-SOCPRO",
+    "target": "IND-21",
+    "pattern": "\\bsocial protection\\b|\\bpublic works\\b|\\bcash transfers?\\b|\\bvulnerable (households?|people|families)\\b|\\bextreme(ly)? poor\\b|\\bextreme poverty\\b|\\bsafety nets?\\b|\\bsocial assistance\\b"
+   },
+   {
+    "id": "D37-DISASTER",
+    "target": "IND-37",
+    "pattern": "^(?!.*\\b(watersheds?|catchments?|degraded)\\b).*(\\bdisasters?\\b|\\bearly warning\\b|\\bflood(s|ing)? (risk|control|management|mitigation)\\b|\\blandslides?\\b|\\bhazards?\\b|\\bweather\\b|\\bmeteorolog|\\bclimate (services|information|data)\\b|\\bemergency preparedness\\b)"
+   },
+   {
+    "id": "D27-INSUR",
+    "target": "IND-27",
+    "pattern": "\\binsur(ed|ance)\\b"
+   },
+   {
+    "id": "D26-AGCREDIT",
+    "target": "IND-26",
+    "pattern": "\\brefinanc\\w*|\\bon ?lending\\b|\\bfinancial institutions? (capitali[sz]ation|strengthening)\\b|\\bagricultur\\w* (credit|lending|loans?) (share|portfolio)\\b|\\blending to agricultur"
+   },
+   {
+    "id": "D23-PROTEIN",
+    "target": "IND-23",
+    "pattern": "\\banimal (source )?(foods?|proteins?) (consumption|intake)\\b|\\bprotein (intake|adequacy)\\b"
+   },
+   {
+    "id": "D24-SELFSUFF",
+    "target": "IND-24",
+    "pattern": "\\bself sufficien|\\bimport substitution\\b"
+   },
+   {
+    "id": "D10-SMALLSTOCK",
+    "target": "IND-10",
+    "pattern": "\\b(pigs?|piglets|poultry|chickens?|goats?|sheep|rabbits?|small (stocks?|livestock|animals))\\b.*\\b(distribut|supplied|given|provided)|\\b(distribut\\w*|supply|purchase)\\b.*\\b(pigs?|poultry|chickens?|goats?|small stocks?)\\b"
+   },
+   {
+    "id": "D29-EXTEN",
+    "target": "IND-29",
+    "pattern": "\\bextension (services?|deliver\\w*|workers?|agents?|officers?|system|model|approach)\\b|\\bextensionists?\\b|\\badvisory\\b|\\bfarmers? (trained|training)\\b|\\btraining (and capacity building )?of (smallholder )?(dairy )?farmers\\b|\\bcapacity building of (smallholder )?farmers\\b|\\bdemonstration (plots?|sites?)\\b|\\bagribusiness\\b|\\bcommercial farming\\b|\\bgood agricultural practices\\b"
+   },
+   {
+    "id": "D19-COOP",
+    "target": "IND-19",
+    "pattern": "\\bcooperativ|\\bco operativ|\\bfarmers? organi[sz]ations?\\b|\\bproducer organi[sz]ations?\\b|\\bfarmer groups?\\b"
+   },
+   {
+    "id": "D08-BREED",
+    "target": "IND-08",
+    "pattern": "\\b(cattle|heifer) (distribution|transfers?)\\b|\\bdistribution of (cattle|heifers)\\b|\\bbreed|\\bgenetic|\\binsemination\\b|\\bsemen\\b|\\bcrossbre|\\bbroodstock\\b|\\bheifers?\\b"
+   },
+   {
+    "id": "D10-FISH",
+    "target": "IND-10",
+    "pattern": "\\bfish|\\baquacultur|\\bhatcher|\\bfingerlings?\\b"
+   },
+   {
+    "id": "D09-ANHEALTH",
+    "target": "IND-09",
+    "pattern": "\\bvaccin(?!.*\\b(children|immuni))|\\bveterinar|\\banimal health\\b|\\banimal'? ?s? diseases?\\b|\\blivestock (services|diseases?)\\b|\\bspraying\\b|\\bdipping\\b|\\bticks?\\b|\\bdiagnostic\\b|\\brabies\\b"
+   },
+   {
+    "id": "D15-SAFETY",
+    "target": "IND-15",
+    "pattern": "\\bfood safety\\b|\\bsafety of animal|\\bsanitary\\b|\\bphytosanitary\\b|\\binspection\\b|\\blaborator(y|ies)\\b|\\btesting\\b|\\bcertif|\\bstandards?\\b(?!.*\\bliving)|\\bquality (assurance|control|and safety|safety)\\b|\\baflatoxin|\\bcodex\\b"
+   },
+   {
+    "id": "D06-DAIRY",
+    "target": "IND-06",
+    "pattern": "\\bdairy\\b"
+   },
+   {
+    "id": "D07-MEAT",
+    "target": "IND-07",
+    "pattern": "\\bmeat\\b|\\bslaughter|\\babattoir|\\bpoultry\\b|\\bpigs?\\b|\\bpiggery\\b|\\bgoats?\\b|\\brabbits?\\b|\\bfeeds?\\b|\\bruminants?\\b|\\blivestocks? (production|productivity|productions)\\b|\\banimm?al (resources )?(production|productivity)\\b|\\bbeekeep|\\bapicult|\\bhoney\\w*\\b|\\binsects\\b"
+   },
+   {
+    "id": "D13-COLD",
+    "target": "IND-13",
+    "pattern": "\\bcold (chain|rooms?|storage|stores?)\\b|\\bcooling\\b|\\brefrigerat"
+   },
+   {
+    "id": "D11-PHL",
+    "target": "IND-11",
+    "pattern": "\\bpost ?harvest\\b|\\bdrying\\b|\\bdryers?\\b|\\bthreshing\\b|\\bshellers?\\b|\\bhermetic\\b|\\btarpaulins?\\b|\\blosses? reduc"
+   },
+   {
+    "id": "D12-STORE",
+    "target": "IND-12",
+    "pattern": "(?<!water )(?<!fuel )\\bstorage\\b|\\bwarehouses?\\b|\\bsilos?\\b|\\bgrain reserves?\\b|\\bstrategic stocks\\b|\\bstores? constructed\\b"
+   },
+   {
+    "id": "D14-PROCESS",
+    "target": "IND-14",
+    "pattern": "\\bprocess(ing|ed|ors?)\\b|\\bvalue addition\\b|\\bvalue added\\b|\\bagro ?process|\\bfactor(y|ies)\\b|\\bagro ?industr|\\bpackaging\\b|\\bmilling\\b|\\bmills?\\b"
+   },
+   {
+    "id": "D16-MARKET",
+    "target": "IND-16",
+    "pattern": "\\bwhole ?sale market\\b|\\bmodern markets?\\b|\\bmarkets? (infrastructure|construct\\w*|built|rehabilit\\w*|sheds?)\\b|\\bselling points?\\b|\\bcollection cent(er|re)s?\\b|\\baggregation cent|\\bmarket linkages?\\b|\\bmarket access\\b|\\bmarket facilitation\\b"
+   },
+   {
+    "id": "D17-EXPORT",
+    "target": "IND-17",
+    "pattern": "\\bexports?\\b|\\bexported\\b|\\btrade (facilitation|promotion)\\b|\\bexternal trade\\b|\\bcross border trade\\b"
+   },
+   {
+    "id": "D18-PRICE",
+    "target": "IND-18",
+    "pattern": "\\bprices?\\b|\\bmarket information\\b|\\bmarket intelligence\\b"
+   },
+   {
+    "id": "D30-RESEARCH",
+    "target": "IND-30",
+    "pattern": "\\bresearch\\b|\\bplant breeding\\b|\\bcrop breeding\\b|\\bvariet(y|ies)\\b|\\bbiofortif|\\bsoil information\\b|\\bsoil (survey\\w*|maps?|analys\\w*)\\b|\\bsoil (fertility |nutrient )?(maps?|mapping)\\b|\\binnovation|\\btechnolog(y|ies|ical) (developed|development|generation|innovations?)\\b|\\bgermplasm\\b|\\btissue culture\\b"
+   },
+   {
+    "id": "D31-MECH",
+    "target": "IND-31",
+    "pattern": "\\bmechani[sz]|\\btractors?\\b|\\bpower tillers?\\b|\\bmachiner|\\bcombine harvest|\\bbal(ing|ling|er)\\b|\\bequipment hire\\b"
+   },
+   {
+    "id": "D35-GHG",
+    "target": "IND-35",
+    "pattern": "\\bemissions?\\b|\\bghg\\b|\\bgreenhouse gas|\\blow carbon\\b|\\bbiogas\\b|\\bcook ?stoves?\\b|\\bclean cooking\\b|\\bcooking (energy|technolog\\w*|solutions?)\\b|\\bbiomass\\b|\\brenewable energy\\b"
+   },
+   {
+    "id": "D32-CSA",
+    "target": "IND-32",
+    "pattern": "\\bclimate smart\\b|\\bconservation agriculture\\b|\\bagro ?ecolog|\\bclimate resilien|\\bresilience\\b|\\badaptation\\b"
+   },
+   {
+    "id": "D34-EROSION",
+    "target": "IND-34",
+    "pattern": "^(?!.*terrac).*(\\bsoil erosion\\b|\\bland degradation\\b|\\bsedimentation\\b)"
+   },
+   {
+    "id": "D33-CONSERV",
+    "target": "IND-33",
+    "pattern": "\\bterrac|\\berosion\\b|\\bsoil (and water )?conservation\\b|\\bwatersheds?\\b|\\bcatchments?\\b|\\breforest|\\bafforest|\\bagro ?forest|\\bforests?\\b|\\btrees?\\b|\\bbuffer zones?\\b|\\bwetlands?\\b|\\becosystems?\\b|\\blandscapes?\\b|\\bwildlife\\b|\\bbiodiversity\\b|\\bprotected areas?\\b|\\bdegraded\\b|\\bwater storage\\b|\\bmultipurpose dams?\\b|\\bdams?\\b|\\briver ?banks?\\b|\\bconservation\\b|\\bnatural resources\\b"
+   },
+   {
+    "id": "D20-HEALTH",
+    "target": "IND-20",
+    "pattern": "\\bhealth\\b|\\bhospitals?\\b|\\bmedical\\b|\\bclinical\\b|\\bmaternal\\b|\\bimmuni[sz]|\\bvaccine\\b|\\bnutrition\\b|\\becd\\b|\\bearly childhood development\\b|\\bfamily planning\\b|\\bcase management\\b"
+   },
+   {
+    "id": "D01-YIELD",
+    "target": "IND-01",
+    "pattern": "\\bproductivity\\b|\\bproduction and productivity\\b|\\bintensification\\b|\\binputs?\\b|\\bagricultural production\\b|\\bcrops? production\\b|\\bfood crops?\\b"
+   }
+  ],
+  "LATE": [
+   {
+    "id": "NP-EDU",
+    "target": "NP",
+    "pattern": "\\bclassrooms?\\b|\\beducation\\b|\\bcurricul|\\bscholarships?\\b|\\bstudents?\\b|\\bacademic\\b"
+   },
+   {
+    "id": "NP-STATS",
+    "target": "NP",
+    "pattern": "\\bstatistics\\b|\\bsurveys?\\b|\\bcensus\\b|\\bdata collected\\b"
+   },
+   {
+    "id": "NP-URBAN",
+    "target": "NP",
+    "pattern": "\\burban\\b|\\bmaster plan\\b|\\bland use (plans?|master plan)\\b"
+   },
+   {
+    "id": "OHW-ADMIN",
+    "target": "OH",
+    "pattern": "\\badministrat|\\bsupport services\\b|\\blogistic(al|s)? (and )?(services|support)?\\b|\\bgoods and services\\b|\\bpayments? to suppliers\\b|\\bresource management\\b|\\bbudget execution\\b|\\brecurrent costs\\b|\\binvestment costs\\b|\\boperational costs\\b|\\bdaily operations\\b|\\brunning costs\\b|\\bcounterpart\\b|\\bproject (coordination|management|activities)\\b|\\bcoordinat(ed|ion) and (management|support)\\b|\\bwell (managed|coordinated|monitored)\\b|\\bmonitoring and evaluation\\b|\\bmonitored and evaluated\\b|\\bplanning and monitoring\\b|\\bpolicy (implementation|related analysis|and regulatory)\\b|\\btechnical assistance\\b|\\bpartnerships?\\b|\\bcoordinated\\b|\\bimplementation support\\b"
+   },
+   {
+    "id": "NP-BUSINESS",
+    "target": "NP",
+    "pattern": "\\btourism\\b|\\bhospitality\\b|\\binvest(ment|ors?)\\b(?!.*\\bagricultur)|\\bbusiness (development|registration|facilitation)\\b|\\bentrepreneur|\\bsmes?\\b|\\bmsmes?\\b|\\bjob creation\\b|\\bemployment\\b|\\bdoing business\\b"
+   },
+   {
+    "id": "NP-LIVELIHOOD",
+    "target": "NP",
+    "pattern": "\\blivelihood diversification\\b|\\bincome generat"
+   }
+  ],
+  "RES": [
+   {
+    "id": "R-AGDEV",
+    "target": "IND-29",
+    "pattern": "^agricultural development"
+   },
+   {
+    "id": "R-CLIMATE",
+    "target": "IND-33",
+    "pattern": "^climate change"
+   },
+   {
+    "id": "R-INFRA",
+    "target": "IND-16",
+    "pattern": "^infrastructure"
+   },
+   {
+    "id": "R-NUTHEALTH",
+    "target": "IND-20",
+    "pattern": "^nutrition"
+   },
+   {
+    "id": "R-SOCIAL",
+    "target": "IND-21",
+    "pattern": "^social assistance"
+   }
+  ]
+ },
+ "residual_default": {
+  "id": "R-NONE",
+  "target": "IND-16"
+ },
+ "example_withheld_stages": {
+  "PRE": [
+   {
+    "id": "X-PRE-STATION",
+    "target": "IND-30",
+    "pattern": "\\bstations?\\b",
+    "agencies": [
+     9001
+    ],
+    "subprogramme_pattern": "\\bresearch\\b"
+   }
+  ],
+  "SUB": [
+   {
+    "id": "X-S-IRRIG",
+    "target": "IND-02",
+    "pattern": "\\birrigation\\b"
+   },
+   {
+    "id": "X-S-ADMIN",
+    "target": "OH",
+    "pattern": "\\badministration\\b"
+   }
+  ],
+  "AGY": {
+   "9001": {
+    "id": "X-A-AGBOARD",
+    "target": "IND-01"
+   },
+   "9002": {
+    "id": "X-A-STATS",
+    "target": "NP"
+   }
+  }
+ },
+ "counts": {
+  "alternatives_deposited": 378,
+  "alternatives_withheld": 120,
+  "rules_deposited": 59,
+  "rules_withheld_entirely": 1,
+  "rules_in_withheld_stages": 68
+ }
+}

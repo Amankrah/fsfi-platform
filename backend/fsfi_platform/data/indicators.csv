@@ -1,0 +1,38 @@
+component,name,direction,benchmark_type,public_series_source,public_series_code,series_match,series_status
+crop_production,Cereal yield (t/ha),higher is better,"regional, 90th percentile",World Bank WDI (FAO-sourced),AG.YLD.CREL.KG / 10000,exact,used
+crop_production,Crop diversification index,higher is better,"global, 90th percentile",FAOSTAT crops (derived),"QCL element 5312, Simpson 1-sum(s^2) over primary crop items",close proxy,used
+crop_production,Fertilizer use (kg/ha),higher is better,"global, 90th percentile",World Bank WDI (FAO-sourced),AG.CON.FERT.ZS,exact,used
+crop_production,Improved seed adoption (%),higher is better,"global, 90th percentile",,,,no public series
+crop_production,Irrigated land (%),higher is better,"global, 90th percentile",FAOSTAT land use (AQUASTAT),QCL-RL 6690 share in cropland,close proxy,"candidate series, not used"
+animal_systems,Animal mortality rate (%),lower is better,"global, 10th percentile",,,,no public series
+animal_systems,Improved breed share (%),higher is better,"global, 90th percentile",,,,no public series
+animal_systems,Meat productivity (kg/head),higher is better,"regional, 90th percentile",FAOSTAT crops and livestock,QCL 867 element 5417 / 10,exact,used
+animal_systems,Milk yield per cow,higher is better,"regional, 90th percentile",FAOSTAT crops and livestock,QCL 882 element 5417,exact,used
+animal_systems,Protein availability (g/day),higher is better,"global, 90th percentile",FAOSTAT food balance sheets,FBS 2941 element 674,close proxy,used
+post_harvest,Cold chain coverage (%),higher is better,"global, 90th percentile",,,,no public series
+post_harvest,Food safety certification (%),higher is better,"regional, 90th percentile",WHO GHO (IHR SPAR food safety capacity),FOODSAFETY_IHR_PERCENT,exact,used
+post_harvest,Post-harvest loss (%),lower is better,"global, 10th percentile",,,,no public series
+post_harvest,Share processed exports (%),higher is better,"global, 90th percentile",,,,no public series
+post_harvest,Storage capacity (MT),higher is better,"global, 90th percentile",,,,no public series
+markets,Cooperative participation (%),higher is better,"global, 90th percentile",,,,no public series
+markets,Export revenue,higher is better,"global, 90th percentile",FAOSTAT trade,TCL 1882 export value / 1000,close proxy,used
+markets,Price volatility index,lower is better,"regional, 10th percentile",,,,no public series
+markets,Share of production marketed (%),higher is better,"global, 90th percentile",,,,no public series
+nutrition,Dietary diversity score,higher is better,"regional, 90th percentile","national survey, minimum dietary diversity (value held in the framework record)",,exact,used
+nutrition,Food insecurity (%),lower is better,"regional, 10th percentile","FAO, Sustainable Development Goal indicator 2.1.1 (via World Bank WDI)",SN.ITK.DEFC.ZS,exact,used
+nutrition,Food self-sufficiency (%),higher is better,framework value,FAO food security indicators,cereal import dependency ratio (inverse),weak proxy,"candidate series, not used"
+nutrition,Protein adequacy (g/day),higher is better,framework value,FAOSTAT food balance sheets,FBS 2901 element 674,close proxy,"candidate series, not used"
+nutrition,Stunting rate (%),lower is better,"global, 10th percentile",UNICEF-WHO-World Bank Joint Malnutrition Estimates,SH.STA.STNT.ME.ZS,exact,used
+finance,Ag credit share (%),higher is better,framework value,FAOSTAT credit to agriculture,IC 23068 share of total credit,exact,"candidate series, not used"
+finance,Farmers with credit (%),higher is better,"global, 90th percentile",Global Findex,fin22a,weak proxy,"candidate series, not used"
+finance,Insured farmers (%),higher is better,"global, 90th percentile",,,,no public series
+finance,Mobile finance penetration (%),higher is better,framework value,Global Findex,mobileaccount.t.d,close proxy,"candidate series, not used"
+research,CSA adoption (%),higher is better,"global, 90th percentile",,,,no public series
+research,Farmers receiving extension (%),higher is better,"global, 90th percentile",,,,no public series
+research,Mechanization rate (%),higher is better,"global, 90th percentile",,,,no public series
+research,R&D spending (% ag GDP),higher is better,"global, 90th percentile",,,,no public series
+environment,Disaster-affected land (ha),lower is better,"regional, 10th percentile",Food Systems Countdown (value held in the framework record),,exact,used
+environment,GHG intensity,lower is better,"regional, 10th percentile",FAOSTAT emissions intensities,"EI items 1718, 27, 867, 882 (simple mean)",close proxy,used
+environment,Irrigation water efficiency (%),lower is better,"regional, 10th percentile",Food Systems Countdown (value held in the framework record),,exact,used
+environment,Land under conservation (%),higher is better,"regional, 90th percentile",Food Systems Countdown (value held in the framework record),,exact,used
+environment,Soil erosion risk (%),lower is better,"global, 10th percentile",,,,no public series

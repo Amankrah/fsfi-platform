@@ -1,0 +1,18 @@
+[Unit]
+Description=FSFI platform API (FastAPI, uvicorn)
+After=network.target
+
+[Service]
+User=fsfi
+Group=fsfi
+WorkingDirectory=/opt/fsfi-platform/app/backend
+Environment=FSFI_CORS_ORIGINS=https://fsfvi.ai
+ExecStart=/opt/fsfi-platform/app/backend/.venv/bin/uvicorn fsfi_platform.main:app --host 127.0.0.1 --port 8010 --workers 2 --proxy-headers --forwarded-allow-ips=127.0.0.1
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

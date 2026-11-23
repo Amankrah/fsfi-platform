@@ -1,0 +1,19 @@
+[Unit]
+Description=FSFI platform web (Next.js)
+After=network.target fsfi-platform-api.service
+
+[Service]
+User=fsfi
+Group=fsfi
+WorkingDirectory=/opt/fsfi-platform/app/frontend
+Environment=NODE_ENV=production
+Environment=PORT=3010
+Environment=NEXT_PUBLIC_API_URL=https://fsfvi.ai/api
+ExecStart=/usr/bin/npm start
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
