@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "FSFI platform: a web platform for the Food System Financing Stress Index"
+version: 1.0.0
+date-released: 2026-11-23
+license: PolyForm-Noncommercial-1.0.0
+repository-code: "https://github.com/Amankrah/fsfi-platform"
+url: "https://fsfvi.ai"
+authors:
+  - family-names: Ulimwengu
+    given-names: John
+    affiliation: "International Food Policy Research Institute (IFPRI), Washington, DC, USA"
+  - family-names: Kwofie
+    given-names: Emmanuel Amankrah
+    affiliation: "Department of Bioresource Engineering, McGill University, Sainte-Anne-de-Bellevue, Quebec, Canada"
+  - family-names: Kwofie
+    given-names: Ebenezer Miezah
+    affiliation: "Department of Bioresource Engineering, McGill University, Sainte-Anne-de-Bellevue, Quebec, Canada"
+keywords:
+  - food systems
+  - public expenditure
+  - financing stress
+  - budget allocation
