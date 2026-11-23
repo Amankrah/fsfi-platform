@@ -1,5 +1,7 @@
 # FSFI Platform: Food System Financing Stress Index
 
+[![DOI](https://zenodo.org/badge/1468185084.svg)](https://doi.org/10.5281/zenodo.24465804)
+
 A general, country-agnostic demonstration platform for the Food System Financing Stress Index (FSFSI) described in
 `docs/paper/manuscript.md` ("Joining budget lines to food-system outcomes shows where money falls short").
 

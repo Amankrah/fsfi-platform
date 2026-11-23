@@ -3,6 +3,7 @@ message: "If you use this software, please cite it as below."
 type: software
 title: "FSFI platform: a web platform for the Food System Financing Stress Index"
 version: 1.0.0
+doi: 10.5281/zenodo.24465804
 date-released: 2026-11-23
 license: PolyForm-Noncommercial-1.0.0
 repository-code: "https://github.com/Amankrah/fsfi-platform"
@@ -22,3 +23,10 @@ keywords:
   - public expenditure
   - financing stress
   - budget allocation
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24465804
+    description: "All versions (resolves to the latest release)"
+  - type: doi
+    value: 10.5281/zenodo.24465805
+    description: "Version 1.0.0"

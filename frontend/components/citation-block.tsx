@@ -17,7 +17,7 @@ function download(name: string, text: string, type: string) {
   URL.revokeObjectURL(url);
 }
 
-/** Recommended citation with copy, BibTeX and RIS. The DOI is a placeholder until one is minted. */
+/** Recommended citation of the archived platform release, with copy, BibTeX and RIS. */
 export function CitationBlock() {
   const { data: health } = useHealth();
   const text = citationText(health?.version);
@@ -26,8 +26,8 @@ export function CitationBlock() {
     <div className="max-w-[68ch]">
       <blockquote className="callout bg-surface py-3 pr-4 text-[1.0625rem] leading-7 text-ink">{text}</blockquote>
       <p className="mt-2 t-caption text-ink-subtle">
-        The journal and DOI are placeholders until the article is published. Cite the platform version shown when you
-        quote figures from it.
+        Archived on Zenodo; the DOI resolves to the latest release. The accompanying article is in preparation and its
+        citation will be added here on publication. Cite the platform version shown when you quote figures from it.
       </p>
       <div className="mt-3 flex flex-wrap gap-2" data-print-hide>
         <Button
@@ -42,10 +42,10 @@ export function CitationBlock() {
           {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
           {copied ? "Copied" : "Copy citation"}
         </Button>
-        <Button variant="secondary" size="sm" onClick={() => download("fsfsi-citation.bib", citationBibtex(), "application/x-bibtex")}>
+        <Button variant="secondary" size="sm" onClick={() => download("fsfsi-citation.bib", citationBibtex(health?.version), "application/x-bibtex")}>
           <Download aria-hidden /> BibTeX
         </Button>
-        <Button variant="secondary" size="sm" onClick={() => download("fsfsi-citation.ris", citationRis(), "application/x-research-info-systems")}>
+        <Button variant="secondary" size="sm" onClick={() => download("fsfsi-citation.ris", citationRis(health?.version), "application/x-research-info-systems")}>
           <Download aria-hidden /> RIS
         </Button>
       </div>
