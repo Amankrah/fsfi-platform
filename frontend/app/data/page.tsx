@@ -190,7 +190,7 @@ export default function DataPage() {
       />
       <Container className="py-10">
         <div className="callout max-w-[68ch]" id="licence">
-          <p className="font-semibold text-ink">Licence in plain words</p>
+          <p className="font-semibold text-ink">Licence summary</p>
           <p className="mt-1 text-ink-muted">
             {SITE.licence.outputs} Cite the platform version you used. {SITE.licence.code}
           </p>

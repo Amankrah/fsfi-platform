@@ -63,7 +63,7 @@ export default function BudgetPage() {
   const yearLines = React.useMemo(() => all.filter((l) => yr === "all" || l.year === yr), [all, yr]);
   const stages = React.useMemo(() => countBy(yearLines, (l) => l.stage), [yearLines]);
   const comps = React.useMemo(
-    () => countBy(yearLines, (l) => l.component).filter(([k]) => k !== "—").map(([k, n]) => [k, n, componentName(k)] as [string, number, string]),
+    () => countBy(yearLines, (l) => l.component).filter(([k]) => k !== "n/a").map(([k, n]) => [k, n, componentName(k)] as [string, number, string]),
     [yearLines, componentName],
   );
   const byComp = React.useMemo(() => {
@@ -97,7 +97,7 @@ export default function BudgetPage() {
             </div>
             {all.length ? (
               <div className="space-y-2">
-                <ChipRow label="Stage" items={stages.filter(([k]) => k !== "—").map(([k, n]) => [k, n, stageLabel(k)])} active={stage} onPick={setStage} />
+                <ChipRow label="Stage" items={stages.filter(([k]) => k !== "n/a").map(([k, n]) => [k, n, stageLabel(k)])} active={stage} onPick={setStage} />
                 <ChipRow label="Component" items={comps} active={comp} onPick={setComp} />
               </div>
             ) : null}
@@ -150,7 +150,7 @@ export default function BudgetPage() {
                         )}
                       </Td>
                       <Td className="whitespace-nowrap text-[12px] text-muted">
-                        {l.stage ? stageLabel(l.stage) : "—"}
+                        {l.stage ? stageLabel(l.stage) : "n/a"}
                         {l.rule ? <span className="block font-mono text-[12px]">{l.rule}</span> : null}
                       </Td>
                       <Td className="text-right">{fmtMoney(l.amount, undefined, 2)}</Td>
@@ -206,7 +206,7 @@ export default function BudgetPage() {
                       <Td>{stageLabel(s)}</Td>
                       <Td className="text-right text-muted">{n} lines</Td>
                       <Td className="text-right">
-                        {fmtPct(yearLines.filter((l) => (l.stage ?? "—") === s).reduce((a, l) => a + l.amount, 0) / (totalAmt || 1), 1)}
+                        {fmtPct(yearLines.filter((l) => (l.stage ?? "n/a") === s).reduce((a, l) => a + l.amount, 0) / (totalAmt || 1), 1)}
                       </Td>
                     </Tr>
                   ))}
@@ -240,7 +240,7 @@ function stageLabel(s: string) {
 function countBy(lines: BudgetLine[], f: (l: BudgetLine) => string | null): [string, number][] {
   const m = new Map<string, number>();
   lines.forEach((l) => {
-    const k = f(l) ?? "—";
+    const k = f(l) ?? "n/a";
     m.set(k, (m.get(k) ?? 0) + 1);
   });
   return [...m.entries()].sort((a, b) => b[1] - a[1]);

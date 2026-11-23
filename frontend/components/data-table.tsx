@@ -64,7 +64,7 @@ export function DataTable<R>({
           const r = ctx.row.original;
           if (c.cell) return c.cell(r);
           const v = c.value(r);
-          if (v === null || v === undefined || (typeof v === "number" && !Number.isFinite(v))) return "—";
+          if (v === null || v === undefined || (typeof v === "number" && !Number.isFinite(v))) return "n/a";
           if (typeof v === "number" && c.format) return c.format(v, r);
           return String(v);
         },

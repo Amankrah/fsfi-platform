@@ -1,12 +1,12 @@
-# FSFI Platform — Food System Financing Stress Index
+# FSFI Platform: Food System Financing Stress Index
 
-A general, country-agnostic demonstration platform for the **Food System Financing Stress Index (FSFSI)** described in
+A general, country-agnostic demonstration platform for the Food System Financing Stress Index (FSFSI) described in
 `docs/paper/manuscript.md` ("Joining budget lines to food-system outcomes shows where money falls short").
 
 ## What it is
 
 The FSFSI joins an executed food-system budget, line by line, to 37 outcome indicators across eight components and
-defines *financing stress* as the part of each indicator's performance gap — its normalised distance from a benchmark —
+defines *financing stress* as the part of each indicator's performance gap (its normalised distance from a benchmark)
 that spending leaves unfinanced under diminishing returns (υ = δ·e^(−αf); a hyperbolic response δ/(1+αf) is available as
 an alternative). The index is the weighted sum of indicator stress. Minimising it within a fixed envelope has a
 closed-form (water-filling) solution that equalises weighted marginal returns, and crossing coverage with the gap labels
@@ -21,7 +21,7 @@ five dependency scenarios and both response forms, and lets a ministry score a d
 ```
 fsfi-platform/
   PLATFORM_SPEC.md     shared API/data contract (TypeScript types are normative)
-  backend/             FastAPI (Python 3.13) — port 8010
+  backend/             FastAPI (Python 3.13), port 8010
     fsfi_platform/
       engine/          reference.py (port of the published equations), kkt.py, rust.py (adapter), get_engine()
       assessment.py    one-year assessment, record, scale curves, weights, draft scoring, Fisher–Jenks calibration
@@ -29,7 +29,7 @@ fsfi-platform/
       synthetic.py     seeded generator of the four demo countries
       store.py         JSON-file store (data/countries/<id>.json)
     tests/             pytest suite
-  frontend/            Next.js 16 (App Router), React 19, TypeScript, Tailwind v4 — port 3010
+  frontend/            Next.js 16 (App Router), React 19, TypeScript, Tailwind v4, port 3010
 ```
 
 - **Engine.** Index, optimum and efficiency go through `get_engine()`. When the compiled Rust extension `fsfi_engine`
@@ -49,7 +49,7 @@ fsfi-platform/
 cd fsfi-platform\backend
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
-# optional: the prebuilt Rust engine wheel (fsfi_engine, cp313 win_amd64) — see backend/README.md
+# optional: the prebuilt Rust engine wheel (fsfi_engine, cp313 win_amd64); see backend/README.md
 .venv\Scripts\python -m uvicorn fsfi_platform.main:app --host 127.0.0.1 --port 8010
 ```
 
@@ -92,34 +92,34 @@ calibrated by Fisher–Jenks on its own synthetic record.
 
 | Country | Design | What it demonstrates |
 |---|---|---|
-| **Republic of Aurelia** — *infrastructure-heavy allocator* | Most money on roads, market places, storage, processing and irrigation; research, animal systems, environment and finance thinly funded; about a quarter of gaps imputed; envelope growing by about two thirds t0→t5. | A typical diagnosis: unfunded gaps hold a small share of the envelope and most of the stress, efficiency well below 1, a negative elasticity, and an optimum that moves money out of the infrastructure components. |
-| **Borealis** — *near-optimal allocator* | Balanced archetype, allocation close to its own optimum, every gap measured. | High efficiency (E ≈ 0.9) and an envelope equivalent near 1×: what a well-composed budget looks like. |
-| **Cordova** — *aid-dependent* | Large on-budget partner finance (budget lines tagged `external`) withdrawn at t3 on its five most partner-financed components. | The withdrawal registers in the record: the envelope index drops, point-in-time and accumulated stress jump and decay slowly. |
-| **Deltana** — *nutrition-led, divergent gaps* | Nutrition the largest component, component gap means drawn far apart, all gaps measured. | How gap data, not just money, drive the optimum and the diagnosis. |
+| **Republic of Aurelia**: *infrastructure-heavy allocator* | Most money on roads, market places, storage, processing and irrigation; research, animal systems, environment and finance thinly funded; about a quarter of gaps imputed; envelope growing by about two thirds t0→t5. | A typical diagnosis: unfunded gaps hold a small share of the envelope and most of the stress, efficiency well below 1, a negative elasticity, and an optimum that moves money out of the infrastructure components. |
+| **Borealis**: *near-optimal allocator* | Balanced archetype, allocation close to its own optimum, every gap measured. | High efficiency (E ≈ 0.9) and an envelope equivalent near 1×: what a well-composed budget looks like. |
+| **Cordova**: *aid-dependent* | Large on-budget partner finance (budget lines tagged `external`) withdrawn at t3 on its five most partner-financed components. | The withdrawal registers in the record: the envelope index drops, point-in-time and accumulated stress jump and decay slowly. |
+| **Deltana**: *nutrition-led, divergent gaps* | Nutrition the largest component, component gap means drawn far apart, all gaps measured. | How gap data, as well as money, drive the optimum and the diagnosis. |
 
 ## Building the platform for a country
 
 Open **Build for a country** (`/builder`). The six-step wizard keeps a draft in the browser until you save.
 
-1. **Identity** — name, tagline, description and currency label (allocations are entered in this unit; millions
+1. **Identity**: name, tagline, description and currency label (allocations are entered in this unit; millions
    recommended). Start from the reference framework, or clone a synthetic country to pre-fill every step.
-2. **Framework** — include or exclude components, rename them, toggle any of the 37 reference indicators, and add
+2. **Framework**: include or exclude components, rename them, toggle any of the 37 reference indicators, and add
    custom indicators (name, component, direction, unit). Download the indicator list as CSV
    (`/api/templates/indicators.csv`).
-3. **Indicator data** — per year, observed value and benchmark for each indicator. Leave *observed* blank to impute
+3. **Indicator data**: per year, observed value and benchmark for each indicator. Leave *observed* blank to impute
    (placeholder ½·benchmark when higher is better, 1.5·benchmark when lower is better; flagged as imputed everywhere).
-   Indicators without a benchmark in a year are not assessed that year. Or upload a records CSV —
+   Indicators without a benchmark in a year are not assessed that year. Or upload a records CSV with the columns
    `year,code,observed,benchmark,allocation` (template: `/api/templates/records.csv`).
-4. **Financing** — allocations per indicator and year, **or upload executed budget lines** —
+4. **Financing**: allocations per indicator and year, or upload executed budget lines with the columns
    `year,agency,sub_programme,line,budget_tag,amount` (template: `/api/mapping/template`). The mapper assigns each line
    to an indicator by audited rules, in order: pre-assigned rules, overhead lines (shared pro rata within their
    sub-programme, agency-year or agency), road and line phrases, late phrases, sub-programme and agency rules, and
    finally a residual by budget tag. It reports what it could not assign, and every year in the file fills that year's
    allocations. The same mapper runs on any country's **Budget lines** page.
-5. **Parameters** — sensitivity α per component (choose α so that α·f is roughly 0.2–3 at the component's budget), the
+5. **Parameters**: sensitivity α per component (choose α so that α·f is roughly 0.2–3 at the component's budget), the
    AHP pairwise matrix with live consistency ratio, dependency matrices per scenario, persistence rates for accumulated
    stress. Published defaults are pre-filled.
-6. **Review** — a live assessment (`POST /api/assess`) of the latest year; fix any listed issues, then **Save** to
+6. **Review**: a live assessment (`POST /api/assess`) of the latest year; fix any listed issues, then **Save** to
    create the country and open its dashboard.
 
 Saved custom countries can be cloned or deleted from **Countries**. With three or more years saved, the **Record** page
@@ -128,7 +128,7 @@ offers a Fisher–Jenks recalibration of the stress and coverage class breaks fr
 
 ## Data confidentiality
 
-Every country shipped with the platform is **synthetic**: values are drawn by a seeded generator from a synthetic
+Every country shipped with the platform is synthetic: values are drawn by a seeded generator from a synthetic
 demonstration calibration, budget lines are generated from rule templates, and no real country, ministry or currency is
 named anywhere. Synthetic countries are read-only through the API and carry a "Synthetic demonstration data" badge in the
 UI. Custom countries exist only in the local JSON store (`FSFI_DATA_DIR`) of the machine running the backend.

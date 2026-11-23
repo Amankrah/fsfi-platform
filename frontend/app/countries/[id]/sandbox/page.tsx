@@ -271,7 +271,7 @@ function Sandbox({ a, currency }: { a: Assessment; currency: string }) {
                 <dt className="t-ui font-medium text-ink">Stress index, draft</dt>
                 <dd className="display-num text-[1.75rem] leading-9 text-evergreen">{fmtIndex(score?.fsfsi, 3)}</dd>
                 <dd className="t-caption text-ink-muted">
-                  {delta === null ? "—" : `${fmtSigned(delta, 3)} against enacted ${fmtIndex(a.system.fsfsi, 3)}`}
+                  {delta === null ? "n/a" : `${fmtSigned(delta, 3)} against enacted ${fmtIndex(a.system.fsfsi, 3)}`}
                 </dd>
                 {score ? <dd className="mt-1.5"><StressBadge cls={score.stress_class} /></dd> : null}
               </div>

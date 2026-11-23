@@ -80,9 +80,9 @@ export function CalibrateCard({ id, controls, current }: { id: string; controls:
               <Tr key={r.key}>
                 <Td>{r.label}</Td>
                 <Td className="text-right tabular">{fmt(current[r.key])}</Td>
-                <Td className="text-right tabular">{res ? fmt(res.breaks[r.key]) : "—"}</Td>
-                <Td className="text-right tabular">{res && r.gvf ? res.gvf[r.gvf].toFixed(3) : "—"}</Td>
-                <Td className="text-right tabular">{res && r.gvf ? res.n[r.gvf] : "—"}</Td>
+                <Td className="text-right tabular">{res ? fmt(res.breaks[r.key]) : "n/a"}</Td>
+                <Td className="text-right tabular">{res && r.gvf ? res.gvf[r.gvf].toFixed(3) : "n/a"}</Td>
+                <Td className="text-right tabular">{res && r.gvf ? res.n[r.gvf] : "n/a"}</Td>
               </Tr>
             ))}
           </tbody>

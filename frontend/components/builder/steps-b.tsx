@@ -225,7 +225,7 @@ export function StepParameters({ draft, update }: { draft: Draft; update: Update
                     {idx.map((gj, b) =>
                       a === b ? (
                         <td key={gj} className="h-8 w-16 rounded-md bg-ink-8 text-center text-muted">
-                          —
+                          n/a
                         </td>
                       ) : (
                         <td key={gj} className="w-16">
@@ -347,7 +347,7 @@ export function StepReview({ draft, goTo }: { draft: Draft; goTo: (step: number)
             "Years",
             profile.years.length > 3
               ? `${profile.years[0].year}–${profile.years[profile.years.length - 1].year} (${profile.years.length})`
-              : profile.years.map((y) => y.year).join(", ") || "—",
+              : profile.years.map((y) => y.year).join(", ") || "n/a",
           ],
           ["Imputed values", `${nImputed} of ${nCells}`],
         ].map(([k, v]) => (
@@ -378,7 +378,7 @@ export function StepReview({ draft, goTo }: { draft: Draft; goTo: (step: number)
 
       <div className="rounded-2xl border border-line">
         <div className="flex items-center justify-between border-b border-line px-6 py-3">
-          <span className="eyebrow">Preview · {latest ?? "—"}</span>
+          <span className="eyebrow">Preview · {latest ?? "n/a"}</span>
           {pending ? <Loader2 className="size-3.5 animate-spin text-muted" /> : null}
         </div>
         <div className="p-6">

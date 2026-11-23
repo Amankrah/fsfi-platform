@@ -71,7 +71,7 @@ export default function MethodPage() {
                 could not assign. The sum of mapped lines is each indicator&apos;s allocation <i>f</i>
                 <sub>i</sub>.
               </p>
-              <Assumptions items={["Each line funds one indicator; shared costs are split pro rata.", "Unassigned amounts are reported, not spread."]} />
+              <Assumptions items={["Each line funds one indicator; shared costs are split pro rata.", "Unassigned amounts are reported separately and are not distributed across indicators."]} />
             </Step>
 
             <Step id="step-3" title="3. Performance gaps">
@@ -128,7 +128,7 @@ export default function MethodPage() {
               ) : (
                 <Skeleton className="h-4 w-3/4" />
               )}
-              <Assumptions items={["The envelope is fixed; the optimum reallocates it, it does not add money.", "The optimum is a benchmark for direction and size of shifts, not a budget proposal."]} />
+              <Assumptions items={["The envelope is fixed; the optimum reallocates it without adding money.", "The optimum indicates the direction and size of shifts; it is not itself a budget proposal."]} />
             </Step>
 
             <Step id="step-6" title="6. Diagnosis">
@@ -271,7 +271,7 @@ function WorkedExample({
       : [
           ["Gap δ", fmtIndex(ind.gap, 3)],
           ["Allocation f", fmtMoney(rec.allocation, p.currency)],
-          ["Sensitivity α (component)", alpha !== undefined ? fmtNum(alpha, 4) : "—"],
+          ["Sensitivity α (component)", alpha !== undefined ? fmtNum(alpha, 4) : "n/a"],
           ["Coverage c", fmtIndex(ind.coverage, 3)],
           ["Stress υ = δ(1 − c)", fmtIndex(ind.stress, 3)],
           ["Weight ω", fmtPct(ind.weight, 2)],

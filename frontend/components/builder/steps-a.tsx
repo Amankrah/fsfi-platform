@@ -422,7 +422,7 @@ export function StepData({ draft, update }: { draft: Draft; update: Update }) {
                       <GridInput label={`${i.code} observed ${year}`} value={c.observed} placeholder="impute" invalid={bad(c.observed)} onChange={(v) => setCell(update, year, i.code, "observed", v)} />
                     </td>
                     <td className="px-2 py-1">
-                      <GridInput label={`${i.code} benchmark ${year}`} value={c.benchmark} placeholder="—" invalid={bad(c.benchmark)} onChange={(v) => setCell(update, year, i.code, "benchmark", v)} />
+                      <GridInput label={`${i.code} benchmark ${year}`} value={c.benchmark} placeholder="n/a" invalid={bad(c.benchmark)} onChange={(v) => setCell(update, year, i.code, "benchmark", v)} />
                     </td>
                   </tr>
                 );

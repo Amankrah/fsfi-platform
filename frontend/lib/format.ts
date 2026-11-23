@@ -2,42 +2,42 @@ const isNum = (v: unknown): v is number => typeof v === "number" && Number.isFin
 
 /** Index values in [0,1] (FSFSI, E, stress, gap). */
 export function fmtIndex(v: number | null | undefined, digits = 2) {
-  return isNum(v) ? v.toFixed(digits) : "—";
+  return isNum(v) ? v.toFixed(digits) : "n/a";
 }
 
 /** Fractions as percentages. */
 export function fmtPct(v: number | null | undefined, digits = 0) {
-  return isNum(v) ? `${(v * 100).toFixed(digits)}%` : "—";
+  return isNum(v) ? `${(v * 100).toFixed(digits)}%` : "n/a";
 }
 
 /** Percentage points, signed. */
 export function fmtPp(v: number | null | undefined, digits = 1) {
-  if (!isNum(v)) return "—";
+  if (!isNum(v)) return "n/a";
   const s = v.toFixed(digits);
   if (Number(s) === 0) return (0).toFixed(digits);
   return v > 0 ? `+${s}` : s.replace("-", "−");
 }
 
 export function fmtSigned(v: number | null | undefined, digits = 2) {
-  if (!isNum(v)) return "—";
+  if (!isNum(v)) return "n/a";
   const s = Math.abs(v).toFixed(digits);
   if (Number(s) === 0) return (0).toFixed(digits);
   return v > 0 ? `+${s}` : `−${s}`;
 }
 
 export function fmtMultiple(v: number | null | undefined, digits = 1) {
-  return isNum(v) ? `${v.toFixed(digits)}×` : "—";
+  return isNum(v) ? `${v.toFixed(digits)}×` : "n/a";
 }
 
 export function fmtMoney(v: number | null | undefined, currency?: string, digits?: number) {
-  if (!isNum(v)) return "—";
+  if (!isNum(v)) return "n/a";
   const d = digits ?? (Math.abs(v) >= 100 ? 0 : Math.abs(v) >= 10 ? 1 : 2);
   const s = v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
   return currency ? `${s} ${currency}` : s;
 }
 
 export function fmtNum(v: number | null | undefined, digits = 2) {
-  if (!isNum(v)) return "—";
+  if (!isNum(v)) return "n/a";
   return v.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
 }
 
@@ -45,7 +45,7 @@ const SUP: Record<string, string> = { "-": "⁻", "0": "⁰", "1": "¹", "2": "�
 
 /** Scientific notation for small or large magnitudes, e.g. 7.42×10⁻⁵. */
 export function fmtSci(v: number | null | undefined, digits = 3) {
-  if (!isNum(v)) return "—";
+  if (!isNum(v)) return "n/a";
   if (v === 0) return "0";
   const a = Math.abs(v);
   if (a >= 0.01 && a < 1e4) return v.toPrecision(digits);
@@ -55,7 +55,7 @@ export function fmtSci(v: number | null | undefined, digits = 3) {
 }
 
 export function fmtMs(v: number | null | undefined) {
-  if (!isNum(v)) return "—";
+  if (!isNum(v)) return "n/a";
   return v < 10 ? `${v.toFixed(2)} ms` : `${v.toFixed(0)} ms`;
 }
 

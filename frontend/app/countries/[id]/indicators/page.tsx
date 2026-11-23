@@ -252,7 +252,7 @@ function IndicatorDrawer({ ind }: { ind: IndicatorResult }) {
               <Tr key={s.year} className={s.year === year ? "bg-saffron-12" : undefined}>
                 <Td>{s.year}</Td>
                 <Td className="text-right">{s.observed === null ? <span className="text-muted">imputed</span> : fmtNum(s.observed, 2)}</Td>
-                <Td className="text-right">{s.benchmark === null ? "—" : fmtNum(s.benchmark, 2)}</Td>
+                <Td className="text-right">{s.benchmark === null ? "n/a" : fmtNum(s.benchmark, 2)}</Td>
                 <Td className="text-right">{fmtMoney(s.allocation)}</Td>
               </Tr>
             ))}

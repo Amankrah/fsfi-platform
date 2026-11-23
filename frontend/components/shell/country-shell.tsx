@@ -95,9 +95,9 @@ export function CountryShell({ id, children }: { id: string; children: React.Rea
         {/* context bar: quoted figures belong on screen, not in a tooltip */}
         <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 border-y border-rule py-2.5 t-ui sm:flex sm:flex-wrap">
           <Ctx label="Assessment year" value={YEARLESS.has(slug) ? `${years[0] ?? ""}–${latest}` : year} />
-          <Ctx label="Budget envelope" value={yr ? fmtMoney(yr.envelope, profile?.currency) : "—"} />
-          <Ctx label="Data vintage" value={profile ? `${profile.kind === "synthetic" ? "Synthetic" : "Custom"}, ${vintage}` : "—"} />
-          <Ctx label="Model version" value={health ? `v${health.version}, ${health.engine} engine` : "—"} />
+          <Ctx label="Budget envelope" value={yr ? fmtMoney(yr.envelope, profile?.currency) : "n/a"} />
+          <Ctx label="Data vintage" value={profile ? `${profile.kind === "synthetic" ? "Synthetic" : "Custom"}, ${vintage}` : "n/a"} />
+          <Ctx label="Model version" value={health ? `v${health.version}, ${health.engine} engine` : "n/a"} />
         </dl>
 
         {/* controls */}

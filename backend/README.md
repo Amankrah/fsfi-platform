@@ -1,4 +1,4 @@
-# FSFI Platform — backend
+# FSFI Platform: backend
 
 FastAPI service for the Food System Financing Stress Index (FSFSI) demonstration platform. It implements the
 paper's Methods (gap and imputation, exponential and hyperbolic stress, five weightings × five scenarios, index,

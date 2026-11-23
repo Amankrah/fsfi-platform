@@ -33,7 +33,7 @@ export function Kpi({
   loading?: boolean;
   children?: React.ReactNode;
 }) {
-  const shown = value === null || value === undefined || !Number.isFinite(value) ? "—" : (format ?? ((v) => v.toFixed(2)))(value);
+  const shown = value === null || value === undefined || !Number.isFinite(value) ? "n/a" : (format ?? ((v) => v.toFixed(2)))(value);
   return (
     <div className={cn("flex min-w-0 flex-col gap-1 border-l-2 border-evergreen bg-surface py-3 pl-4 pr-3", className)}>
       <div className="t-ui font-medium text-ink">

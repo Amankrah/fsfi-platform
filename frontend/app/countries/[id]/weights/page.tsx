@@ -143,7 +143,7 @@ export default function WeightsPage() {
           rowHeader="From ↓ / to →"
           diagonalBlank
           caption="Dependency matrix"
-          cellTitle={(r, c, v) => `${names[r]} → ${names[c]}: ${v === null ? "—" : v.toFixed(2)}`}
+          cellTitle={(r, c, v) => `${names[r]} → ${names[c]}: ${v === null ? "n/a" : v.toFixed(2)}`}
         />
       </Figure>
     </div>
