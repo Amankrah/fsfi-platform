@@ -30,12 +30,13 @@ export const STEPS = [
   { slug: "sandbox", label: "Draft scoring", title: "Score a draft budget" },
   { slug: "plan", label: "Strategic plan", title: "Multi-year strategic plan" },
   { slug: "strategy", label: "Strategy alignment", title: "National strategy alignment" },
+  { slug: "investor", label: "Investor programme", title: "External investor programme" },
 ] as const;
 
 /** Pages whose content does not depend on a single year. */
 const YEARLESS = new Set(["record", "scale"]);
 /** Pages that always start from the latest assessed year. */
-const LATEST = new Set(["plan", "strategy"]);
+const LATEST = new Set(["plan", "strategy", "investor"]);
 
 export function CountryShell({ id, children }: { id: string; children: React.ReactNode }) {
   const { data: profile, error, isLoading, mutate } = useCountry(id);

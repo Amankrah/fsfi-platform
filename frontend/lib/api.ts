@@ -13,6 +13,8 @@ import type {
   Evidence,
   Framework,
   Health,
+  InvestmentRequest,
+  InvestmentResult,
   MappingResult,
   Plan,
   PlanParams,
@@ -162,6 +164,8 @@ export const api = {
   evidence: () => request<Evidence>("/evidence"),
   plan: (id: string, c: Partial<Controls>, p: PlanParams) =>
     request<Plan>(`/countries/${enc(id)}/plan`, { query: { ...ctlQuery({ ...c, year: undefined }), ...p } }),
+  investment: (id: string, body: InvestmentRequest) =>
+    json<InvestmentResult>(`/countries/${enc(id)}/investment`, "POST", body),
   strategy: (id: string, c: Partial<Controls>, p: PlanParams) =>
     request<StrategyReport>(`/countries/${enc(id)}/strategy`, { query: { ...ctlQuery({ ...c, year: undefined }), ...p } }),
 };
@@ -266,6 +270,14 @@ export function useStrategy(id: string | undefined, c: Partial<Controls>, p: Pla
   return useSWR<StrategyReport>(
     id ? ["strategy", id, c.weighting, c.scenario, c.response, ...planKey(p)] : null,
     () => api.strategy(id!, c, p),
+    base,
+  );
+}
+
+export function useInvestment(id: string | undefined, body: InvestmentRequest | null) {
+  return useSWR<InvestmentResult>(
+    id && body ? ["investment", id, JSON.stringify(body)] : null,
+    () => api.investment(id!, body!),
     base,
   );
 }

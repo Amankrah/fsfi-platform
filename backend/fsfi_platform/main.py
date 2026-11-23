@@ -8,6 +8,7 @@ import os
 from contextlib import asynccontextmanager
 from typing import List, Optional
 
+from pydantic import BaseModel, Field
 from fastapi import FastAPI, File, HTTPException, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
@@ -15,6 +16,7 @@ from fastapi.responses import JSONResponse, PlainTextResponse
 from . import assessment as A
 from . import evidence as EV
 from . import framework as FW
+from . import investor as INV
 from . import planning as PL
 from . import store
 from .engine import get_engine
@@ -201,6 +203,34 @@ def country_strategy(cid: str, horizon: int = 5, target_reduction: float = 0.20,
     p = _get(cid)
     return PL.strategy_report(p, weighting, scenario, response, key=store.cache_key(p),
                               plan_params=_plan_params(horizon, target_reduction, target, growth, curve, pace))
+
+
+class InvestmentRequest(BaseModel):
+    name: str = ""
+    indicators: List[str] = []
+    components: List[str] = []
+    amount: float = Field(gt=0, description="money added per year, in the country's currency")
+    years: Optional[int] = None
+    split: str = "equal"
+    weighting: str = "hybrid"
+    scenario: str = "normal_operations"
+    response: str = "exponential"
+    horizon: int = 5
+    target_reduction: float = 0.20
+    target: Optional[float] = None
+    growth: float = 0.05
+    curve: str = "smoothstep"
+    pace: float = 1.0
+
+
+@app.post("/api/countries/{cid}/investment")
+def country_investment(cid: str, body: InvestmentRequest):
+    """An external investor's programme scored against the best use of the same money, the plan and the strategy."""
+    p = _get(cid)
+    b = body.model_dump()
+    pp = _plan_params(b.pop("horizon"), b.pop("target_reduction"), b.pop("target"), b.pop("growth"), b.pop("curve"),
+                      b.pop("pace"))
+    return INV.investment(p, key=store.cache_key(p), plan_params=pp, **b)
 
 
 @app.get("/api/countries/{cid}/budget-lines", response_model=BudgetLinesPage)

@@ -15,7 +15,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import type { Plan, StrategyReport } from "@/lib/types";
+import type { InvestmentResult, Plan, StrategyReport } from "@/lib/types";
 import { fmtIndex, fmtMoney, fmtPct } from "@/lib/format";
 import { TooltipCard } from "./chart-tooltip";
 import { LegendItem } from "./figure";
@@ -192,6 +192,65 @@ export function AlignmentHistoryChart({ report, height = 260 }: { report: Strate
       <div className="mt-2 flex flex-wrap gap-5">
         <LegendItem label="Actual allocation" />
         <LegendItem label="End of plan" color="var(--steel)" dotted />
+      </div>
+    </div>
+  );
+}
+
+/** Accumulated index of the plan alone and of the plan with an investor programme on top. */
+export function ProgrammePathChart({ r, height = 320 }: { r: InvestmentResult; height?: number }) {
+  const data = r.plan.path;
+  const vals = data.flatMap((d) => [d.plan_acc, d.with_acc, d.year_target]).concat(r.plan.target);
+  const lo = Math.max(0, Math.floor((Math.min(...vals) - 0.02) * 20) / 20);
+  const hi = Math.ceil((Math.max(...vals) + 0.02) * 20) / 20;
+  const lastPaid = [...data].reverse().find((d) => d.disbursed > 0)?.year;
+  return (
+    <div>
+      <ResponsiveContainer width="100%" height={height}>
+        <ComposedChart data={data} margin={{ top: 12, right: 24, bottom: 0, left: 0 }}>
+          <CartesianGrid {...gridProps} />
+          <XAxis dataKey="year" {...axisProps} />
+          <YAxis domain={[lo, hi]} {...yAxisProps} tickFormatter={(v: number) => v.toFixed(2)} />
+          <ReferenceLine
+            y={r.plan.target}
+            stroke={C_TARGET}
+            strokeDasharray="2 3"
+            label={{ value: `Target ${fmtIndex(r.plan.target, 3)}`, position: "insideBottomLeft", fill: "var(--saffron-ink)", fontSize: 13 }}
+          />
+          {lastPaid ? (
+            <ReferenceLine
+              x={lastPaid}
+              stroke="var(--rule-strong)"
+              strokeDasharray="3 3"
+              label={{ value: "Last disbursement", position: "insideTopRight", fill: "var(--ink-subtle)", fontSize: 13 }}
+            />
+          ) : null}
+          <Tooltip
+            cursor={{ stroke: "var(--line-strong)" }}
+            content={(p: TipProps<(typeof data)[number]>) => {
+              const d = tipDatum(p);
+              if (!d) return null;
+              return (
+                <TooltipCard
+                  title={d.year}
+                  rows={[
+                    { label: "Plan with the programme", value: fmtIndex(d.with_acc, 3), color: "var(--steel)", strong: true },
+                    { label: "Plan alone", value: fmtIndex(d.plan_acc, 3), color: C_PLAN },
+                    { label: "Difference", value: fmtIndex(d.plan_acc - d.with_acc, 4) },
+                    { label: "Disbursed", value: fmtMoney(d.disbursed) },
+                  ]}
+                />
+              );
+            }}
+          />
+          <Line dataKey="plan_acc" stroke={C_PLAN} strokeWidth={2} strokeDasharray="6 4" dot={{ r: 3.5, fill: "var(--canvas)", stroke: C_PLAN, strokeWidth: 1.5 }} isAnimationActive={false} />
+          <Line dataKey="with_acc" stroke="var(--steel)" strokeWidth={2.4} dot={{ r: 4.5, fill: "var(--steel)", stroke: "var(--canvas)", strokeWidth: 1.5 }} isAnimationActive={false} />
+        </ComposedChart>
+      </ResponsiveContainer>
+      <div className="mt-2 flex flex-wrap gap-5">
+        <LegendItem label="Plan with the programme" color="var(--steel)" />
+        <LegendItem label="Plan alone" color={C_PLAN} dashed />
+        <LegendItem label="Plan target" color={C_TARGET} dotted />
       </div>
     </div>
   );

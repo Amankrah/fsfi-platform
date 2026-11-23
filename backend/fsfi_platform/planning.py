@@ -25,6 +25,8 @@ from .engine import reference as R
 CURVES = ("linear", "smoothstep", "frontloaded")
 MAX_HORIZON = 15
 GROWTH_SEARCH = (-0.10, 1.00)
+PLAN_DEFAULTS = {"horizon": 5, "target_reduction": 0.20, "target": None, "growth": 0.05, "curve": "smoothstep",
+                 "pace": 1.0}
 
 # ---------------------------------------------------------------------------
 # Demonstration strategy (generic; used when a profile carries none)
@@ -124,8 +126,9 @@ def check_plan_params(horizon, growth, curve, pace, target_reduction, target):
 # Projection
 # ---------------------------------------------------------------------------
 
-def _project(base, profile, horizon, growth, pace, response, keep_shares=False, detail=True):
-    """Project `horizon` years from the base record entry. Returns a list of per-year dicts."""
+def _project(base, profile, horizon, growth, pace, response, keep_shares=False, detail=True, extra=None):
+    """Project `horizon` years from the base record entry. Returns a list of per-year dicts. `extra(k, f)`, if
+    given, returns money added on top of the year's allocation (outside the envelope that the shares split)."""
     x = base["x"]
     d, a, w = x.delta, x.alpha, base["w"]
     F0 = base["F"]
@@ -140,6 +143,8 @@ def _project(base, profile, horizon, growth, pace, response, keep_shares=False, 
             fopt, _ = kkt.optimum(d, a, w, F, response)
             shares = shares + pace * (fopt / F - shares)
         f = shares * F
+        if extra is not None:
+            f = f + extra(k, f)
         s = kkt.stress(d, f, a, response)
         fs = kkt.index(d, f, a, w, response)
         prev, acc = R.accumulated_step(prev, dict(zip(x.codes, s)), cmap, fs, rates)

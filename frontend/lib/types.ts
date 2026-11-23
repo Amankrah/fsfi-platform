@@ -493,3 +493,104 @@ export interface StrategyReport {
   };
   plan: { params: PlanParams; target: number; summary: PlanSummary; end_year: string };
 }
+
+/* ------------------------------------------------------------ external investor programmes */
+
+export type InvestmentSplit = "equal" | "best";
+
+export interface InvestmentRequest extends Partial<PlanParams> {
+  name?: string;
+  indicators: string[];
+  components: string[];
+  amount: number;
+  years?: number;
+  split: InvestmentSplit;
+  weighting?: Weighting;
+  scenario?: string;
+  response?: ResponseForm;
+}
+
+export interface InvestmentIndicator {
+  code: string;
+  name: string;
+  component: string;
+  selected: boolean;
+  added: number;
+  best_added: number;
+  allocation: number;
+  gap: number;
+  stress: number;
+  stress_with: number;
+  reduction: number;
+  diagnosis: Diagnosis;
+}
+
+export interface InvestmentResult {
+  country_id: string;
+  year: string;
+  programme: {
+    name: string;
+    split: InvestmentSplit;
+    amount: number;
+    years: number;
+    total: number;
+    n_indicators: number;
+    indicators: string[];
+    components: string[];
+    share_of_envelope: number;
+  };
+  snapshot: {
+    fsfsi: number;
+    fsfsi_with: number;
+    reduction: number;
+    reduction_pct: number;
+    best_any: number;
+    best_selection: number;
+    national_proportional: number;
+    value_for_money: number;
+    value_within_selection: number;
+    vs_national: number;
+    reduction_per_100: number;
+    stress_class: StressClass;
+    stress_class_with: StressClass;
+  };
+  indicators: InvestmentIndicator[];
+  components: { id: string; name: string; added: number; best_added: number; stress: number; stress_with: number; reduction: number }[];
+  plan: {
+    params: PlanParams;
+    target: number;
+    end_year: string;
+    plan_end: number;
+    with_end: number;
+    additional_reduction: number;
+    plan_reached: boolean;
+    with_reached: boolean;
+    first_year_with: string | null;
+    first_year_plan: string | null;
+    path: {
+      year: string;
+      step: number;
+      disbursed: number;
+      plan_fsfsi: number;
+      with_fsfsi: number;
+      plan_acc: number;
+      with_acc: number;
+      year_target: number;
+    }[];
+  };
+  strategy: {
+    name: string;
+    areas: {
+      code: string;
+      name: string;
+      programme_share: number;
+      target_share: number;
+      actual_share: number;
+      actual_share_with: number;
+      deviation_pp: number;
+    }[];
+    under_target_share: number;
+    alignment_before: number;
+    alignment_after: number;
+  };
+}

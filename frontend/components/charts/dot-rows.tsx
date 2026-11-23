@@ -67,8 +67,9 @@ export function DotRows({
 }) {
   const [ref, { width }] = useSize<HTMLDivElement>();
   const rowH = 44;
-  const labelW = width < 640 ? 120 : 210;
-  const colsW = rightHeader ? (width < 640 ? 64 : 96) : 8;
+  const labelW = width < 480 ? 116 : width < 760 ? 176 : 210;
+  const colsW = rightHeader ? (width < 640 ? 60 : 96) : 8;
+  const maxChars = Math.floor((labelW - 10) / 7);
   const m = { top: 28, bottom: 30 };
   const W = Math.max(width, 280);
   const iw = W - labelW - colsW - 16;
@@ -111,7 +112,7 @@ export function DotRows({
               <g key={r.id}>
                 <line x1={labelW} x2={labelW + iw} y1={cy} y2={cy} stroke="var(--line)" strokeDasharray="1 4" />
                 <text x={0} y={cy} dy="0.35em" className="fill-[var(--ink)] text-small">
-                  {r.label.length > (labelW < 150 ? 15 : 28) ? `${r.label.slice(0, labelW < 150 ? 14 : 27)}…` : r.label}
+                  {r.label.length > maxChars ? `${r.label.slice(0, maxChars - 1)}…` : r.label}
                   <title>{r.label}</title>
                 </text>
                 {a && b ? (
