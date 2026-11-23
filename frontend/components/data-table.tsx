@@ -95,7 +95,7 @@ export function DataTable<R>({
   return (
     <div className={cn("min-w-0", className)}>
       <div
-        className="relative w-full overflow-auto rounded-[2px] border border-rule bg-surface"
+        className="relative w-full overflow-auto rounded-sm border border-rule bg-surface"
         style={maxHeight ? { maxHeight } : undefined}
         tabIndex={0}
         role="region"
@@ -115,7 +115,7 @@ export function DataTable<R>({
                       scope="col"
                       aria-sort={sorted === "asc" ? "ascending" : sorted === "desc" ? "descending" : "none"}
                       className={cn(
-                        "whitespace-nowrap border-b border-rule-strong bg-ivory px-3 py-1.5 text-[12px] font-semibold text-ink-muted",
+                        "whitespace-nowrap border-b border-rule-strong bg-ivory px-3 py-1.5 text-micro font-semibold text-ink-muted",
                         c?.numeric ? "text-right" : "text-left",
                         i === 0 && frozenFirst && "sticky left-0 z-20",
                       )}
@@ -126,7 +126,7 @@ export function DataTable<R>({
                         aria-label={c?.short ? `${c.header}${c.unit ? ` (${c.unit})` : ""}, sort` : undefined}
                         onClick={h.column.getToggleSortingHandler()}
                         className={cn(
-                          "inline-flex min-h-6 items-center gap-1 rounded-[2px] hover:text-evergreen",
+                          "inline-flex min-h-6 items-center gap-1 rounded-sm hover:text-evergreen",
                           c?.numeric && "flex-row-reverse",
                         )}
                       >
@@ -149,7 +149,7 @@ export function DataTable<R>({
             {table.getRowModel().rows.map((row) => (
               <tr
                 key={row.id}
-                className={cn("odd:bg-surface even:bg-[#fdfbf7] hover:bg-ink-4", onRowClick && "cursor-pointer")}
+                className={cn("odd:bg-surface even:bg-paper hover:bg-ink-4", onRowClick && "cursor-pointer")}
                 onClick={onRowClick ? () => onRowClick(row.original) : undefined}
               >
                 {row.getVisibleCells().map((cell, i) => {

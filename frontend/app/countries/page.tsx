@@ -29,7 +29,7 @@ interface Row {
 const PIN_STYLE: { color: string; shape: MarkerShape }[] = [
   { color: "var(--evergreen)", shape: "circle" },
   { color: "var(--saffron-mark)", shape: "square" },
-  { color: "var(--green-500)", shape: "triangle" },
+  { color: "var(--steel)", shape: "triangle" },
   { color: "var(--neutral-mark)", shape: "diamond" },
 ];
 
@@ -274,7 +274,7 @@ function SmallMultiple({ r }: { r: Row }) {
             </span>
             <span className="relative h-2.5 bg-ink-6" aria-hidden>
               <span
-                className={cn("absolute inset-y-0 left-0", k.stress === max ? "bg-evergreen" : "bg-green-500")}
+                className={cn("absolute inset-y-0 left-0", k.stress === max ? "bg-evergreen" : "bg-steel")}
                 style={{ width: `${Math.min(1, k.stress) * 100}%` }}
               />
             </span>

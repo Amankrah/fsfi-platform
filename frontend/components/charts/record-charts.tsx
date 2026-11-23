@@ -60,7 +60,7 @@ export function IndexRecordChart({
                 label={
                   compact
                     ? undefined
-                    : { value: bandName[i], position: "right", fill: "var(--ink-78)", fontSize: 12 }
+                    : { value: bandName[i], position: "right", fill: "var(--ink-78)", fontSize: 13 }
                 }
               />
             ) : null,
@@ -130,7 +130,7 @@ export function EnvelopeIndexChart({ ts, height = 240 }: { ts: TimeSeries; heigh
           }}
         />
         <Area dataKey="envelope_index" stroke="var(--ink)" strokeWidth={2} fill="var(--ink-6)" dot={{ r: 3.5, fill: "var(--ink)", stroke: "var(--canvas)" }}>
-          <LabelList dataKey="envelope_index" position="top" offset={10} formatter={(v: unknown) => (typeof v === "number" ? v.toFixed(0) : "")} style={{ fill: "var(--ink-78)", fontSize: 12 }} />
+          <LabelList dataKey="envelope_index" position="top" offset={10} formatter={(v: unknown) => (typeof v === "number" ? v.toFixed(0) : "")} style={{ fill: "var(--ink-78)", fontSize: 13 }} />
         </Area>
       </ComposedChart>
     </ResponsiveContainer>
@@ -146,7 +146,7 @@ export function EfficiencyRecordChart({ ts, height = 240 }: { ts: TimeSeries; he
           <CartesianGrid {...gridProps} />
           <XAxis dataKey="year" {...axisProps} />
           <YAxis domain={[0, 1.05]} {...yAxisProps} ticks={[0, 0.25, 0.5, 0.75, 1]} tickFormatter={(v: number) => v.toFixed(2)} />
-          <ReferenceLine y={1} stroke="var(--rule-strong)" strokeDasharray="1.5 3" label={{ value: "Optimum", position: "insideTopRight", fill: "var(--ink-78)", fontSize: 12 }} />
+          <ReferenceLine y={1} stroke="var(--rule-strong)" strokeDasharray="1.5 3" label={{ value: "Optimum", position: "insideTopRight", fill: "var(--ink-78)", fontSize: 13 }} />
           <Tooltip
             cursor={{ stroke: "var(--line-strong)" }}
             content={(p: TipProps<TimeSeriesYear>) => {
@@ -236,15 +236,15 @@ export function UnfundedTrend({ ts }: { ts: TimeSeries }) {
   return (
     <div className="space-y-2">
       <div className="mb-2 flex flex-wrap gap-x-5 gap-y-1">
-        <LegendItem marker={<span className="size-3 bg-green-500" />} label="Share of budget" />
+        <LegendItem marker={<span className="size-3 bg-steel" />} label="Share of budget" />
         <LegendItem marker={<span className="size-3 bg-evergreen" />} label="Share of stress" />
       </div>
       {rows.map((r) => (
-        <div key={r.year} className="grid grid-cols-[44px_1fr] items-center gap-3 text-[12px] tabular">
+        <div key={r.year} className="grid grid-cols-[44px_1fr] items-center gap-3 text-micro tabular">
           <span className="text-ink-muted">{r.year}</span>
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <div className="h-2.5 bg-green-500" style={{ width: `${r.env * 80}%`, minWidth: 2 }} />
+              <div className="h-2.5 bg-steel" style={{ width: `${r.env * 80}%`, minWidth: 2 }} />
               <span className="text-ink-muted">{fmtPct(r.env)}</span>
             </div>
             <div className="flex items-center gap-2">

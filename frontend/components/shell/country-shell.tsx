@@ -197,7 +197,7 @@ function WorkspaceNav({ id, slug, query, hasLines }: { id: string; slug: string;
               <span
                 aria-hidden
                 className={cn(
-                  "inline-flex size-5 shrink-0 items-center justify-center rounded-full border text-[12px] tabular",
+                  "inline-flex size-5 shrink-0 items-center justify-center rounded-full border text-micro tabular",
                   active ? "border-evergreen bg-evergreen text-white" : i < idx ? "border-green-700 text-green-700" : "border-rule-strong text-ink-subtle",
                 )}
               >
@@ -222,7 +222,7 @@ function WorkspaceNav({ id, slug, query, hasLines }: { id: string; slug: string;
           id="ws-country"
           value={id}
           onChange={(e) => router.push(`/countries/${e.target.value}${slug ? `/${slug}` : ""}`)}
-          className="h-9 w-full appearance-none rounded-[2px] border border-rule-strong bg-surface pl-3 pr-8 t-ui text-ink"
+          className="h-9 w-full appearance-none rounded-sm border border-rule-strong bg-surface pl-3 pr-8 t-ui text-ink"
         >
           {(countries ?? [{ id, name: id, kind: "synthetic" as const }]).map((c) => (
             <option key={c.id} value={c.id}>
@@ -252,7 +252,7 @@ function WorkspaceNav({ id, slug, query, hasLines }: { id: string; slug: string;
           aria-expanded={open}
           aria-controls="ws-steps"
           onClick={() => setOpen((o) => !o)}
-          className="mt-3 flex h-10 w-full items-center justify-between rounded-[2px] border border-rule-strong bg-surface px-3 t-ui font-medium text-ink"
+          className="mt-3 flex h-10 w-full items-center justify-between rounded-sm border border-rule-strong bg-surface px-3 t-ui font-medium text-ink"
         >
           <span>
             Step {idx + 1} of {STEPS.length}: {STEPS[idx]?.label}

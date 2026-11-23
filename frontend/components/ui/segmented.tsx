@@ -27,7 +27,7 @@ export function Segmented<T extends string>({
       aria-label={label}
       value={value}
       onValueChange={(v) => v && onValueChange(v as T)}
-      className={cn("inline-flex items-stretch rounded-[2px] border border-rule-strong bg-surface", className)}
+      className={cn("inline-flex items-stretch rounded-sm border border-rule-strong bg-surface", className)}
     >
       {options.map((o, i) => (
         <ToggleGroup.Item
@@ -38,7 +38,7 @@ export function Segmented<T extends string>({
             "font-medium tabular transition-colors data-[state=on]:bg-evergreen data-[state=on]:text-white",
             "text-ink-muted hover:bg-ink-4 hover:text-ink",
             i > 0 && "border-l border-rule-strong",
-            size === "sm" ? "h-[30px] min-w-[28px] px-2.5 text-[12.5px]" : "h-9 px-3 text-[13px]",
+            size === "sm" ? "h-[30px] min-w-[28px] px-2.5 text-micro" : "h-9 px-3 text-small",
           )}
         >
           {o.label}

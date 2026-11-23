@@ -1,22 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Source_Serif_4 } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/shell/site-header";
 import { SiteFooter, PrintFooter } from "@/components/shell/site-footer";
 
-const serif = Source_Serif_4({
+// Interface and figures: Inter (neo-grotesque, screen-first, tabular figures, disambiguated I/l/1 and 0/O).
+const sans = Inter({
   subsets: ["latin"],
-  variable: "--font-source-serif",
+  variable: "--font-inter",
   axes: ["opsz"],
   display: "swap",
 });
-const sans = IBM_Plex_Sans({
+// Print only: printed pages are set in a text serif.
+const serif = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-plex-sans",
+  variable: "--font-source-serif",
   display: "swap",
+  preload: false,
 });
 const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-mono", display: "swap" });
 
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0F3D33",
+  themeColor: "#0E3B2E",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

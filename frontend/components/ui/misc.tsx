@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 /** shadcn/ui Skeleton: a flat block, no shimmer. */
 export function Skeleton({ className, style }: { className?: string; style?: React.CSSProperties }) {
-  return <div aria-hidden className={cn("skeleton rounded-[2px]", className)} style={style} />;
+  return <div aria-hidden className={cn("skeleton rounded-sm", className)} style={style} />;
 }
 
 /** shadcn/ui Input: 1 px rule-strong border (3.26:1), 2 px radius. */
@@ -14,7 +14,7 @@ export function Input({ className, ...props }: React.InputHTMLAttributes<HTMLInp
   return (
     <input
       className={cn(
-        "h-9 w-full rounded-[2px] border border-rule-strong bg-surface px-3 text-sm text-ink placeholder:text-ink-subtle",
+        "h-9 w-full rounded-sm border border-rule-strong bg-surface px-3 text-sm text-ink placeholder:text-ink-subtle",
         className,
       )}
       {...props}
@@ -26,7 +26,7 @@ export function Textarea({ className, ...props }: React.TextareaHTMLAttributes<H
   return (
     <textarea
       className={cn(
-        "w-full rounded-[2px] border border-rule-strong bg-surface px-3 py-2 text-sm text-ink placeholder:text-ink-subtle",
+        "w-full rounded-sm border border-rule-strong bg-surface px-3 py-2 text-sm text-ink placeholder:text-ink-subtle",
         className,
       )}
       {...props}
@@ -35,7 +35,7 @@ export function Textarea({ className, ...props }: React.TextareaHTMLAttributes<H
 }
 
 export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
-  return <label className={cn("mb-1.5 block text-[13px] font-medium text-ink", className)} {...props} />;
+  return <label className={cn("mb-1.5 block text-small font-medium text-ink", className)} {...props} />;
 }
 
 /** shadcn/ui Tooltip. */
@@ -55,7 +55,7 @@ export function Tip({
         <T.Content
           side={side}
           sideOffset={6}
-          className="z-50 max-w-xs rounded-[2px] bg-evergreen px-3 py-2 text-[13px] leading-snug text-white shadow-lg"
+          className="z-50 max-w-xs rounded-sm bg-evergreen px-3 py-2 text-small leading-snug text-white shadow-lg"
         >
           {content}
           <T.Arrow className="fill-evergreen" />
@@ -82,7 +82,7 @@ export function Switch({
   className?: string;
 }) {
   return (
-    <label className={cn("inline-flex cursor-pointer items-center gap-2 text-[13px] text-ink", className)}>
+    <label className={cn("inline-flex cursor-pointer items-center gap-2 text-small text-ink", className)}>
       <Sw.Root
         checked={checked}
         onCheckedChange={onCheckedChange}
@@ -96,7 +96,7 @@ export function Switch({
 }
 
 export function Kbd({ children }: { children: React.ReactNode }) {
-  return <kbd className="rounded-[2px] border border-rule-strong bg-ivory px-1.5 py-0.5 font-mono text-[12px]">{children}</kbd>;
+  return <kbd className="rounded-sm border border-rule-strong bg-ivory px-1.5 py-0.5 font-mono text-micro">{children}</kbd>;
 }
 
 export function Divider({ className }: { className?: string }) {

@@ -5,33 +5,45 @@
    was checked with the WCAG relative-luminance formula; see DESIGN.md.
    ------------------------------------------------------------------ */
 :root {
+  /* Palette: cool slate neutrals carry the screen; one brand colour (forest green); steel blue as the
+     second data colour; amber only for highlights. Red and green are kept for meaning (unfunded gap,
+     at benchmark) and are not used as decoration. Every text/background pair below was checked with
+     the WCAG relative-luminance formula (text >= 4.5:1, marks and control borders >= 3:1). */
+
   /* surfaces */
-  --paper: #fbf8f2;
-  --ivory: #f6f1e7;
+  --paper: #f6f8fa;
+  --ivory: #eef2f6; /* panels, table headers */
   --surface: #ffffff;
 
   /* text */
-  --ink: #1f2a27;
-  --ink-muted: #4a5a55;
-  --ink-subtle: #5c6b66;
+  --ink: #111c2d;
+  --ink-muted: #3f4d60;
+  --ink-subtle: #586579;
 
   /* brand */
-  --evergreen: #0f3d33;
-  --saffron-bright: #c9a227; /* decorative tone: only on evergreen */
-  --saffron: #9a7814; /* chart-mark tone: 3.68:1 on ivory; legacy chart code uses this name */
-  --saffron-12: #f8f0d8; /* highlight fill behind ink text */
-  --saffron-20: #f1e5c1;
-  --saffron-ink: #7a5f0e; /* saffron-family text on light */
-  --saffron-mark: #9a7814; /* saffron chart marks on light */
-  --green-700: #2c5b4d;
-  --green-500: #5f8476;
-  --neutral-mark: #7f8c88;
-  --alert: #b8461f;
+  --evergreen: #0e3b2e;
+  --evergreen-hover: #0a2c22;
+  --green-700: #17634c; /* links */
+
+  /* data and accents */
+  --steel: #2f5d8c; /* second data colour */
+  --saffron-bright: #d9a93a; /* decorative: only on evergreen */
+  --saffron: #9a6208; /* amber chart mark and highlight line */
+  --saffron-mark: #9a6208;
+  --saffron-ink: #7f5206; /* amber text on light */
+  --saffron-12: #fbf3df; /* highlight fill behind ink text */
+  --saffron-20: #f3e2b6;
+  --neutral-mark: #758396;
+
+  /* semantic */
+  --alert: #b42318;
+  --positive: #047857;
+  --warning: #c4520e;
 
   /* rules */
-  --rule: #e6ddcb;
-  --rule-strong: #8c8574;
-  --focus: #0f3d33;
+  --rule: #e1e6ed;
+  --rule-strong: #7d8ca0;
+  --focus: #0e3b2e;
 
   /* compatibility aliases used by the chart code */
   --canvas: var(--paper);
@@ -50,33 +62,47 @@
   --ink-78: var(--ink-muted);
   --ink-85: color-mix(in srgb, var(--ink) 85%, var(--paper));
 
-  /* stress classes and diagnosis (four steps, each mark >= 3:1 on paper) */
+  /* Stress classes: an ordered ramp that darkens with severity (slate, light amber, orange, dark red); low is
+     drawn hollow. Diagnosis: red where money has not reached the gap, light amber where it partly has, blue
+     where money is there but the gap persists, green at benchmark. Both sets pass the dataviz validator for
+     colour-vision-deficient and normal-vision separation; the light amber sits below 3:1 on white, so every
+     use carries a text label and a table view. */
   --stress-low: var(--neutral-mark);
-  --stress-medium: var(--green-500);
-  --stress-high: var(--evergreen);
-  --stress-critical: var(--alert);
-  --dx-at_benchmark: var(--neutral-mark);
-  --dx-partially_funded_gap: var(--green-500);
-  --dx-funded_gap: var(--evergreen);
-  --dx-unfunded_gap: var(--alert);
+  --stress-medium: #d9a13b;
+  --stress-high: #c4520e;
+  --stress-critical: #8e1b12;
+  --dx-at_benchmark: #047857;
+  --dx-partially_funded_gap: #d9a13b;
+  --dx-funded_gap: #1f64a8;
+  --dx-unfunded_gap: #b42318;
 
   /* single elevation, for popovers, menus and dialogs only */
-  --elevation: 0 1px 2px rgb(15 61 51 / 0.08), 0 8px 24px rgb(15 61 51 / 0.12);
+  --elevation: 0 1px 2px rgb(17 28 45 / 0.06), 0 8px 24px rgb(17 28 45 / 0.10);
 
   color-scheme: light;
 }
 
 @theme {
+  /* Type scale. Nothing on screen is set below 13 px. */
+  --text-xs: 0.8125rem;      /* 13 px; replaces the Tailwind 12 px default */
+  --text-xs--line-height: 1.125rem;
+  --text-micro: 0.8125rem;   /* 13 px: axis ticks, badges, table headers */
+  --text-micro--line-height: 1.125rem;
+  --text-small: 0.875rem;    /* 14 px: secondary text, dense tables */
+  --text-small--line-height: 1.375rem;
+  --text-ui: 0.9375rem;      /* 15 px: controls, navigation, table body */
+  --text-ui--line-height: 1.5rem;
+
   --radius-xs: 2px;
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 2px;
-  --radius-xl: 4px;
-  --radius-2xl: 4px;
-  --radius-3xl: 4px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 8px;
+  --radius-3xl: 12px;
   --shadow-2xs: none;
-  --shadow-xs: none;
-  --shadow-sm: none;
+  --shadow-xs: 0 1px 2px rgb(17 28 45 / 0.04);
+  --shadow-sm: 0 1px 2px rgb(17 28 45 / 0.05), 0 1px 3px rgb(17 28 45 / 0.04);
   --shadow-md: none;
   --shadow-lg: var(--elevation);
   --shadow-xl: var(--elevation);
@@ -100,7 +126,10 @@
   --color-saffron-ink: var(--saffron-ink);
   --color-saffron-mark: var(--saffron-mark);
   --color-green-700: var(--green-700);
-  --color-green-500: var(--green-500);
+  --color-steel: var(--steel);
+  --color-evergreen-hover: var(--evergreen-hover);
+  --color-positive: var(--positive);
+  --color-warning: var(--warning);
   --color-neutral-mark: var(--neutral-mark);
   --color-alert: var(--alert);
   --color-rule: var(--rule);
@@ -119,12 +148,12 @@
   --color-ink-70: var(--ink-70);
   --color-ink-78: var(--ink-78);
 
-  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
-  --font-display: var(--font-source-serif), ui-serif, Georgia, serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif; /* print only */
+  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", Consolas, monospace;
 
-  --radius-card: 4px;
+  --radius-card: 8px;
 }
 
 @layer base {
@@ -139,7 +168,11 @@
     color: var(--ink);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.625;
+    line-height: 1.6;
+    /* Inter alternates that separate look-alike glyphs: l with tail (cv05), I with serifs (cv08). */
+    font-feature-settings: "cv05" 1, "cv08" 1;
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
   }
   ::selection {
     background: var(--saffron-20);
@@ -156,11 +189,11 @@
     box-shadow: none;
   }
   h1, h2 {
-    font-family: var(--font-serif);
-    font-optical-sizing: auto;
-    font-weight: 500;
+    font-family: var(--font-display);
+    font-weight: 600;
     color: var(--evergreen);
-    letter-spacing: -0.005em;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
   }
   h3, h4 {
     font-family: var(--font-sans);
@@ -173,27 +206,28 @@
   * {
     border-color: var(--rule);
   }
-  table {
-    font-variant-numeric: tabular-nums lining-nums;
+  /* Figures in tables line up by place value; a slashed zero keeps 0 distinct from O. */
+  table, input[type="number"], output {
+    font-variant-numeric: tabular-nums lining-nums slashed-zero;
   }
 }
 
 @layer components {
   /* type scale (brief §5.3) */
-  .t-display { font-family: var(--font-serif); font-size: 2.25rem; line-height: 2.75rem; font-weight: 500; }
-  .t-h1 { font-family: var(--font-serif); font-size: 1.875rem; line-height: 2.375rem; font-weight: 500; }
-  .t-h2 { font-family: var(--font-serif); font-size: 1.5rem; line-height: 2rem; font-weight: 500; }
+  .t-display { font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; font-weight: 600; letter-spacing: -0.025em; }
+  .t-h1 { font-family: var(--font-display); font-size: 1.875rem; line-height: 2.375rem; font-weight: 600; letter-spacing: -0.02em; }
+  .t-h2 { font-family: var(--font-display); font-size: 1.5rem; line-height: 2rem; font-weight: 600; letter-spacing: -0.015em; }
   @media (min-width: 768px) {
     .t-display { font-size: 3rem; line-height: 3.5rem; }
     .t-h1 { font-size: 2.25rem; line-height: 2.75rem; }
     .t-h2 { font-size: 1.75rem; line-height: 2.25rem; }
   }
-  .t-h3 { font-size: 1.375rem; line-height: 1.875rem; font-weight: 600; }
-  .t-h4 { font-size: 1.125rem; line-height: 1.625rem; font-weight: 600; }
-  .t-lead { font-size: 1.125rem; line-height: 1.875rem; }
-  .t-ui { font-size: 0.875rem; line-height: 1.25rem; }
-  .t-caption { font-size: 0.8125rem; line-height: 1.125rem; }
-  .t-micro { font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.02em; }
+  .t-h3 { font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; letter-spacing: -0.01em; }
+  .t-h4 { font-size: 1.0625rem; line-height: 1.5rem; font-weight: 600; }
+  .t-lead { font-size: 1.125rem; line-height: 1.75rem; }
+  .t-ui { font-size: 0.9375rem; line-height: 1.5rem; }
+  .t-caption { font-size: 0.875rem; line-height: 1.375rem; }
+  .t-micro { font-size: 0.8125rem; line-height: 1.125rem; }
 
   .prose-measure { max-width: 68ch; }
   .prose-measure p + p { margin-top: 1rem; }
@@ -211,17 +245,17 @@
 }
 
 @layer utilities {
-  .tabular { font-variant-numeric: tabular-nums lining-nums; }
+  .tabular { font-variant-numeric: tabular-nums lining-nums slashed-zero; }
   .display-num {
     font-family: var(--font-sans);
-    font-variant-numeric: tabular-nums lining-nums;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums lining-nums slashed-zero;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
   .eyebrow {
-    font-size: 0.75rem;
-    line-height: 1rem;
-    letter-spacing: 0.02em;
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    letter-spacing: 0.01em;
     font-weight: 600;
     color: var(--ink-subtle);
   }
@@ -235,9 +269,10 @@
 
 /* Recharts: recessive axes and grid */
 .recharts-cartesian-grid line { stroke: var(--rule); }
-.recharts-cartesian-axis-tick-value { fill: var(--ink-subtle); font-size: 12px; font-variant-numeric: tabular-nums; }
+.recharts-cartesian-axis-tick-value { fill: var(--ink-subtle); font-size: 13px; font-variant-numeric: tabular-nums slashed-zero; }
 .recharts-cartesian-axis-line, .recharts-cartesian-axis-tick-line { stroke: var(--rule-strong); }
-.recharts-label { fill: var(--ink-subtle); font-size: 12px; }
+.recharts-label { fill: var(--ink-subtle); font-size: 13px; }
+.recharts-legend-item-text { font-size: 13px; }
 .recharts-tooltip-cursor { stroke: var(--rule-strong); }
 .recharts-surface:focus, .recharts-wrapper:focus { outline: none; }
 .recharts-wrapper:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }

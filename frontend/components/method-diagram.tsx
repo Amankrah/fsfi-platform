@@ -21,7 +21,7 @@ export function MethodDiagram({ linkSteps }: { linkSteps?: boolean }) {
             {i < STEPS.length - 1 ? (
               <span aria-hidden className="absolute left-[15px] top-8 h-[calc(100%-2rem)] w-px bg-rule-strong md:left-8 md:right-0 md:top-[15px] md:h-px md:w-auto" />
             ) : null}
-            <span className="relative z-10 inline-flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-evergreen bg-paper text-[14px] font-semibold text-evergreen tabular">
+            <span className="relative z-10 inline-flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-evergreen bg-paper text-small font-semibold text-evergreen tabular">
               {s.n}
             </span>
             <div className="md:mt-3">

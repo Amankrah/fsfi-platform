@@ -88,13 +88,13 @@ export function CalibrateCard({ id, controls, current }: { id: string; controls:
           </tbody>
         </Table>
         {res?.warnings.length ? (
-          <ul className="mt-3 space-y-1 text-[12.5px] text-muted">
+          <ul className="mt-3 space-y-1 text-micro text-muted">
             {res.warnings.map((w) => (
               <li key={w}>· {w}</li>
             ))}
           </ul>
         ) : null}
-        {res?.applied ? <p className="mt-3 text-[12.5px] font-medium text-ink">Applied.</p> : null}
+        {res?.applied ? <p className="mt-3 text-micro font-medium text-ink">Applied.</p> : null}
       </CardBody>
     </Card>
   );

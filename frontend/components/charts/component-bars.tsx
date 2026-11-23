@@ -77,7 +77,7 @@ export function ComponentStressBars({ rows }: { rows: ComponentResult[] }) {
                 strokeWidth={r.diagnosis === "at_benchmark" ? 2 : 0}
               />
             ))}
-            <LabelList dataKey="label" position="right" style={{ fill: "var(--ink)", fontSize: 12 }} />
+            <LabelList dataKey="label" position="right" style={{ fill: "var(--ink)", fontSize: 13 }} />
           </Bar>
         </BarChart>
       </ResponsiveContainer>
@@ -94,8 +94,8 @@ export function ReallocationBars({ rows }: { rows: ComponentResult[] }) {
   return (
     <div>
       <div className="mb-2 flex flex-wrap gap-x-5 gap-y-1">
-        <LegendItem marker={<span className="size-3 bg-evergreen" />} label="Receives more at the optimum" />
-        <LegendItem marker={<span className="size-3" style={{ background: "var(--saffron-mark)" }} />} label="Gives up share" />
+        <LegendItem marker={<span className="size-3 bg-steel" />} label="Receives more at the optimum" />
+        <LegendItem marker={<span className="size-3" style={{ background: "var(--neutral-mark)" }} />} label="Gives up share" />
       </div>
       <ResponsiveContainer width="100%" height={data.length * 38 + 40}>
         <BarChart data={data} layout="vertical" margin={{ top: 4, right: 56, bottom: 4, left: 4 }} barCategoryGap="28%" accessibilityLayer>
@@ -122,9 +122,9 @@ export function ReallocationBars({ rows }: { rows: ComponentResult[] }) {
           />
           <Bar dataKey="shift_pp" isAnimationActive={false}>
             {data.map((r) => (
-              <Cell key={r.id} fill={r.shift_pp >= 0 ? "var(--evergreen)" : "var(--saffron-mark)"} />
+              <Cell key={r.id} fill={r.shift_pp >= 0 ? "var(--steel)" : "var(--neutral-mark)"} />
             ))}
-            <LabelList dataKey="label" position="right" style={{ fill: "var(--ink)", fontSize: 12 }} />
+            <LabelList dataKey="label" position="right" style={{ fill: "var(--ink)", fontSize: 13 }} />
           </Bar>
         </BarChart>
       </ResponsiveContainer>

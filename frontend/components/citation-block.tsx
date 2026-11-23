@@ -24,7 +24,7 @@ export function CitationBlock() {
   const [copied, setCopied] = React.useState(false);
   return (
     <div className="max-w-[68ch]">
-      <blockquote className="callout bg-surface py-3 pr-4 font-serif text-[1.0625rem] leading-7 text-ink">{text}</blockquote>
+      <blockquote className="callout bg-surface py-3 pr-4 text-[1.0625rem] leading-7 text-ink">{text}</blockquote>
       <p className="mt-2 t-caption text-ink-subtle">
         The journal and DOI are placeholders until the article is published. Cite the platform version shown when you
         quote figures from it.

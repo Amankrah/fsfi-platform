@@ -27,7 +27,7 @@ export default function OptimumPage() {
     { key: "captured", header: "Reduction captured", unit: "%", numeric: true, value: (p) => +(p.captured * 100).toFixed(1), format: (v) => v.toFixed(1) },
   ];
   const mrColumns: ColumnSpec<IndicatorResult>[] = [
-    { key: "code", header: "Code", value: (d) => d.code, className: "font-mono text-[13px]" },
+    { key: "code", header: "Code", value: (d) => d.code, className: "font-mono text-small" },
     { key: "name", header: "Indicator", value: (d) => d.name },
     { key: "mr", header: "Marginal return", numeric: true, value: (d) => d.marginal_return, format: (v) => fmtSci(v) },
     { key: "actual", header: "Actual allocation", unit: profile.currency, numeric: true, value: (d) => +d.allocation.toFixed(2), format: (v) => fmtMoney(v) },

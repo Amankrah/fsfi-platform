@@ -17,7 +17,7 @@ import type { WeightsReport } from "@/lib/types";
 
 const VECTORS: { key: keyof WeightsReport["vectors"]; label: string; color: string }[] = [
   { key: "ahp", label: "Expert", color: "var(--neutral-mark)" },
-  { key: "pagerank", label: "Network", color: "var(--green-500)" },
+  { key: "pagerank", label: "Network", color: "var(--steel)" },
   { key: "cascade", label: "Cascade", color: "var(--green-700)" },
   { key: "financial", label: "Budget share", color: "var(--saffron-mark)" },
   { key: "hybrid", label: "Hybrid", color: "var(--evergreen)" },

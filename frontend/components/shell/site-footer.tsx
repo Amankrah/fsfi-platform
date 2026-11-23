@@ -13,7 +13,7 @@ export function SiteFooter() {
     <footer data-site-footer className="mt-auto border-t border-rule bg-ivory">
       <div className="mx-auto grid w-full max-w-[1120px] gap-8 px-4 py-10 t-ui text-ink-muted md:grid-cols-12 md:px-6">
         <div className="md:col-span-5">
-          <p className="font-serif text-[1.125rem] text-evergreen">{SITE.name}</p>
+          <p className="text-[1.125rem] font-semibold text-evergreen">{SITE.name}</p>
           <p className="mt-2">
             Developed by the International Food Policy Research Institute (IFPRI) and the Department of Bioresource
             Engineering, McGill University. All country data on this site are synthetic.

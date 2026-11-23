@@ -46,7 +46,7 @@ export function FrontLoadedChart({
             domain={[0, maxMoved]}
             {...axisProps}
             tickFormatter={(v: number) => fmtPct(v)}
-            label={{ value: "Share of budget moved", position: "insideBottom", offset: -4, fill: "var(--ink-78)", fontSize: 12 }}
+            label={{ value: "Share of budget moved", position: "insideBottom", offset: -4, fill: "var(--ink-78)", fontSize: 13 }}
             height={40}
           />
           <YAxis domain={[0, 1]} {...yAxisProps} tickFormatter={(v: number) => fmtPct(v)} />
@@ -82,7 +82,7 @@ export function FrontLoadedChart({
             fill="var(--saffron)"
             stroke="var(--evergreen)"
             strokeWidth={1.4}
-            label={{ value: fmtPct(at10), position: "right", fill: "var(--ink)", fontSize: 12, offset: 12 }}
+            label={{ value: fmtPct(at10), position: "right", fill: "var(--ink)", fontSize: 13, offset: 12 }}
           />
         </ComposedChart>
       </ResponsiveContainer>
@@ -120,7 +120,7 @@ export function MarginalReturnsChart({
       <ResponsiveContainer width="100%" height={height}>
         <BarChart data={data} margin={{ top: 18, right: 16, bottom: 4, left: 4 }} barCategoryGap={2}>
           <CartesianGrid {...gridProps} />
-          <XAxis dataKey="code" {...axisProps} interval={0} angle={-60} textAnchor="end" height={64} tick={{ fill: "var(--ink-78)", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+          <XAxis dataKey="code" {...axisProps} interval={0} angle={-60} textAnchor="end" height={72} tick={{ fill: "var(--ink-78)", fontSize: 12, fontFamily: "var(--font-mono)" }} />
           <YAxis scale="sqrt" domain={[0, max]} {...yAxisProps} width={8} tick={false} />
           <Tooltip
             cursor={{ fill: "var(--ink-4)" }}
@@ -141,19 +141,19 @@ export function MarginalReturnsChart({
           />
           <Bar dataKey="marginal_return" radius={[3, 3, 0, 0]}>
             {data.map((d) => (
-              <Cell key={d.code} fill={d.above ? "var(--evergreen)" : "var(--neutral-mark)"} />
+              <Cell key={d.code} fill={d.above ? "var(--steel)" : "var(--neutral-mark)"} />
             ))}
           </Bar>
           <ReferenceLine
             y={lambda}
             stroke="var(--saffron)"
             strokeWidth={2}
-            label={{ value: "Common return level", position: "insideTopRight", fill: "var(--saffron-ink)", fontSize: 12, fontWeight: 600 }}
+            label={{ value: "Common return level", position: "insideTopRight", fill: "var(--saffron-ink)", fontSize: 13, fontWeight: 600 }}
           />
         </BarChart>
       </ResponsiveContainer>
       <div className="mt-2 flex flex-wrap gap-5">
-        <LegendItem marker={<span className="size-3 bg-evergreen" />} label="Would gain money" />
+        <LegendItem marker={<span className="size-3 bg-steel" />} label="Would gain money" />
         <LegendItem marker={<span className="size-3 bg-neutral-mark" />} label="Would give money up" />
         <LegendItem color="var(--saffron)" label="Common return level" />
       </div>

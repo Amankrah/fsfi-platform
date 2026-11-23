@@ -105,7 +105,7 @@ function StartCard({
           {title}
           {busy ? <span className="text-xs text-muted">loading…</span> : null}
         </span>
-        <span className="mt-0.5 block text-[13px] text-muted">{body}</span>
+        <span className="mt-0.5 block text-small text-muted">{body}</span>
       </span>
       {active ? null : <Copy className="size-4 shrink-0 text-ink-40" strokeWidth={1.5} />}
     </button>
@@ -127,7 +127,7 @@ export function StepFramework({ draft, update }: { draft: Draft; update: Update 
           {draft.components.map((c, i) => (
             <div key={c.id} className={cn("rounded-xl border p-4 transition-opacity", c.included ? "border-line-strong" : "border-dashed border-line-strong opacity-55")}>
               <div className="mb-3 flex items-center justify-between">
-                <span className="flex items-center gap-2 font-mono text-[12px] text-muted">
+                <span className="flex items-center gap-2 font-mono text-micro text-muted">
                   <MarkerGlyph shape={styles[c.id].shape} fill={styles[c.id].fill} size={13} />
                   {c.id}
                 </span>
@@ -149,7 +149,7 @@ export function StepFramework({ draft, update }: { draft: Draft; update: Update 
                 aria-label={`Short label of ${c.id}`}
                 value={c.short}
                 onChange={(e) => update((d) => ({ ...d, components: d.components.map((x, j) => (j === i ? { ...x, short: e.target.value } : x)) }))}
-                className="h-8 text-[12.5px]"
+                className="h-8 text-micro"
               />
             </div>
           ))}
@@ -179,7 +179,7 @@ export function StepFramework({ draft, update }: { draft: Draft; update: Update 
             if (!inds.length) return null;
             return (
               <div key={c.id} className={cn("rounded-xl border border-line p-4", !c.included && "opacity-50")}>
-                <div className="mb-2 flex items-center gap-2 text-[13.5px] font-medium">
+                <div className="mb-2 flex items-center gap-2 text-small font-medium">
                   <MarkerGlyph shape={styles[c.id].shape} fill={styles[c.id].fill} size={13} />
                   {c.name}
                 </div>
@@ -195,11 +195,11 @@ export function StepFramework({ draft, update }: { draft: Draft; update: Update 
                         }
                         className="size-4 accent-[var(--evergreen)]"
                       />
-                      <label htmlFor={`ind-${ind.code}`} className="flex min-w-0 flex-1 items-center gap-2 text-[13px]">
-                        <span className="w-14 shrink-0 font-mono text-[12px] text-muted">{ind.code}</span>
+                      <label htmlFor={`ind-${ind.code}`} className="flex min-w-0 flex-1 items-center gap-2 text-small">
+                        <span className="w-14 shrink-0 font-mono text-micro text-muted">{ind.code}</span>
                         <span className="truncate">{ind.name}</span>
                       </label>
-                      <span className="shrink-0 text-[12px] text-muted">{ind.direction === "higher" ? "↑ better" : "↓ better"}</span>
+                      <span className="shrink-0 text-micro text-muted">{ind.direction === "higher" ? "↑ better" : "↓ better"}</span>
                       {ind.custom ? (
                         <button
                           type="button"
@@ -296,7 +296,7 @@ function YearTabs({ draft, update, year, setYear }: { draft: Draft; update: Upda
           setNewYear("");
         }}
       >
-        <Input value={newYear} onChange={(e) => setNewYear(e.target.value)} placeholder={`t${draft.years.length}`} className="h-8 w-20 text-[12.5px]" aria-label="New year label" />
+        <Input value={newYear} onChange={(e) => setNewYear(e.target.value)} placeholder={`t${draft.years.length}`} className="h-8 w-20 text-micro" aria-label="New year label" />
         <Button type="submit" variant="outline" size="sm">
           <Plus /> Year
         </Button>
@@ -339,7 +339,7 @@ function GridInput({ value, onChange, label, placeholder, invalid }: { value: st
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
       className={cn(
-        "h-8 w-full rounded-md border bg-transparent px-2 text-right text-[13px] tabular placeholder:text-ink-40 hover:border-line-strong focus-visible:border-ink-55 focus-visible:bg-surface",
+        "h-8 w-full rounded-md border bg-transparent px-2 text-right text-small tabular placeholder:text-ink-40 hover:border-line-strong focus-visible:border-ink-55 focus-visible:bg-surface",
         invalid ? "border-saffron bg-saffron-12" : "border-transparent",
       )}
     />
@@ -394,14 +394,14 @@ export function StepData({ draft, update }: { draft: Draft; update: Update }) {
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <YearTabs draft={draft} update={update} year={year} setYear={setYear} />
-          <span className="text-[12.5px] text-muted tabular">
+          <span className="text-micro text-muted tabular">
             {filled}/{inds.length} with benchmark · {imputed} imputed
           </span>
         </div>
         <div className="max-h-[560px] overflow-auto rounded-xl border border-line">
-          <table className="w-full text-[13px]">
+          <table className="w-full text-small">
             <thead className="sticky top-0 z-10 bg-surface">
-              <tr className="text-left text-[12px] text-muted">
+              <tr className="text-left text-micro text-muted">
                 <th className="border-b border-line-strong px-3 py-2 font-semibold">Indicator</th>
                 <th className="w-20 border-b border-line-strong px-3 py-2 font-semibold">Dir.</th>
                 <th className="w-32 border-b border-line-strong px-3 py-2 text-right font-semibold">Observed</th>
@@ -414,10 +414,10 @@ export function StepData({ draft, update }: { draft: Draft; update: Update }) {
                 return (
                   <tr key={i.code} className="border-b border-line last:border-0 hover:bg-ink-4">
                     <td className="px-3 py-1">
-                      <span className="mr-2 font-mono text-[12px] text-muted">{i.code}</span>
+                      <span className="mr-2 font-mono text-micro text-muted">{i.code}</span>
                       {i.name}
                     </td>
-                    <td className="px-3 py-1 text-[12px] text-muted">{i.direction === "higher" ? "↑" : "↓"}</td>
+                    <td className="px-3 py-1 text-micro text-muted">{i.direction === "higher" ? "↑" : "↓"}</td>
                     <td className="px-2 py-1">
                       <GridInput label={`${i.code} observed ${year}`} value={c.observed} placeholder="impute" invalid={bad(c.observed)} onChange={(v) => setCell(update, year, i.code, "observed", v)} />
                     </td>
@@ -504,14 +504,14 @@ export function StepFinancing({ draft, update }: { draft: Draft; update: Update;
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <YearTabs draft={draft} update={update} year={year} setYear={setYear} />
-          <span className="text-[13px]">
+          <span className="text-small">
             Total {year}: <b className="display-num text-[1.3rem]">{fmtMoney(envelope)}</b> {draft.currency}
           </span>
         </div>
         <div className="max-h-[560px] overflow-auto rounded-xl border border-line">
-          <table className="w-full text-[13px]">
+          <table className="w-full text-small">
             <thead className="sticky top-0 z-10 bg-surface">
-              <tr className="text-left text-[12px] text-muted">
+              <tr className="text-left text-micro text-muted">
                 <th className="border-b border-line-strong px-3 py-2 font-semibold">Indicator</th>
                 <th className="w-40 border-b border-line-strong px-3 py-2 text-right font-semibold">Allocation</th>
                 <th className="w-24 border-b border-line-strong px-3 py-2 text-right font-semibold">Share</th>
@@ -526,14 +526,14 @@ export function StepFinancing({ draft, update }: { draft: Draft; update: Update;
                     <td className="px-3 py-1">
                       <span className="flex items-center gap-2">
                         <MarkerGlyph shape={styles[i.component]?.shape ?? "circle"} fill={styles[i.component]?.fill ?? "var(--ink)"} size={11} />
-                        <span className="w-14 font-mono text-[12px] text-muted">{i.code}</span>
+                        <span className="w-14 font-mono text-micro text-muted">{i.code}</span>
                         {i.name}
                       </span>
                     </td>
                     <td className="px-2 py-1">
                       <GridInput label={`${i.code} allocation ${year}`} value={c.allocation} placeholder="0" invalid={bad(c.allocation)} onChange={(v) => setCell(update, year, i.code, "allocation", v)} />
                     </td>
-                    <td className="px-3 py-1 text-right text-[12px] tabular text-muted">
+                    <td className="px-3 py-1 text-right text-micro tabular text-muted">
                       <span className="inline-flex items-center gap-2">
                         <span className="h-1 w-10 overflow-hidden rounded-full bg-ink-8">
                           <span className="block h-full bg-ink" style={{ width: `${share * 100}%` }} />
@@ -562,7 +562,7 @@ export function StepFinancing({ draft, update }: { draft: Draft; update: Update;
         </div>
         <FileDrop onFile={runMapper} busy={busy} label="Upload budget CSV" />
         {mapped ? (
-          <p className="mt-3 flex items-start gap-2 text-[12.5px] text-ink">
+          <p className="mt-3 flex items-start gap-2 text-micro text-ink">
             <Upload className="mt-0.5 size-3.5 shrink-0" /> {mapped}
           </p>
         ) : null}

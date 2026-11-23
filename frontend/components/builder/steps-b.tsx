@@ -49,7 +49,7 @@ function NumCell({ value, onChange, label, step = "0.01", className }: { value: 
         const v = Number(e.target.value);
         if (e.target.value.trim() !== "" && Number.isFinite(v) && v >= 0) onChange(v);
       }}
-      className={cn("h-8 w-full rounded-md border border-line-strong bg-surface px-2 text-right text-[12.5px] tabular hover:border-ink-40", className)}
+      className={cn("h-8 w-full rounded-md border border-line-strong bg-surface px-2 text-right text-micro tabular hover:border-ink-40", className)}
     />
   );
 }
@@ -86,10 +86,10 @@ export function StepParameters({ draft, update }: { draft: Draft; update: Update
       <section className="space-y-10">
         <div className="max-w-2xl">
           <div className="eyebrow mb-1">Sensitivity</div>
-          <p className="mb-4 text-[13px] text-muted">How fast money closes each gap, per {draft.currency}.</p>
-          <table className="w-full text-[13px]">
+          <p className="mb-4 text-small text-muted">How fast money closes each gap, per {draft.currency}.</p>
+          <table className="w-full text-small">
             <thead>
-              <tr className="text-left text-[12px] text-muted">
+              <tr className="text-left text-micro text-muted">
                 <th className="pb-2 font-semibold">Component</th>
                 <th className="w-32 pb-2 text-right font-semibold">Rate</th>
                 <th className="w-28 pb-2 text-right font-semibold">Coverage {latest}</th>
@@ -125,7 +125,7 @@ export function StepParameters({ draft, update }: { draft: Draft; update: Update
             <div className="eyebrow">Expert comparisons</div>
             <div
               className={cn(
-                "rounded-full px-3 py-1 text-[12px] font-semibold tabular",
+                "rounded-full px-3 py-1 text-micro font-semibold tabular",
                 res.cr < 0.1 ? "bg-ink text-canvas" : "bg-saffron text-evergreen",
               )}
               aria-live="polite"
@@ -133,9 +133,9 @@ export function StepParameters({ draft, update }: { draft: Draft; update: Update
               Consistency {res.cr.toFixed(3)} {res.cr < 0.1 ? "· ok" : "· revise"}
             </div>
           </div>
-          <p className="mb-4 text-[13px] text-muted">How much more important is the row than the column (1–9).</p>
+          <p className="mb-4 text-small text-muted">How much more important is the row than the column (1–9).</p>
           <div className="overflow-x-auto">
-            <table className="border-separate border-spacing-1 text-[12px]">
+            <table className="border-separate border-spacing-1 text-micro">
               <thead>
                 <tr>
                   <th />
@@ -174,7 +174,7 @@ export function StepParameters({ draft, update }: { draft: Draft; update: Update
                               const s = SAATY.find((x) => x.label === e.target.value);
                               if (s) setAhp(gi, gj, s.v);
                             }}
-                            className="h-8 w-14 rounded-md border border-line-strong bg-surface px-1 text-center text-[12px] tabular hover:border-ink-40"
+                            className="h-8 w-14 rounded-md border border-line-strong bg-surface px-1 text-center text-micro tabular hover:border-ink-40"
                           >
                             {SAATY.map((s) => (
                               <option key={s.label} value={s.label}>
@@ -205,9 +205,9 @@ export function StepParameters({ draft, update }: { draft: Draft; update: Update
             <div className="eyebrow">Dependencies</div>
             <Select size="sm" label="Scenario" value={scenario} onValueChange={setScenario} options={scenarios.map((s) => ({ value: s, label: scenarioLabel(s) }))} />
           </div>
-          <p className="mb-4 text-[13px] text-muted">Share of a failure in the row that reaches the column (0–1).</p>
+          <p className="mb-4 text-small text-muted">Share of a failure in the row that reaches the column (0–1).</p>
           <div className="overflow-x-auto">
-            <table className="border-separate border-spacing-1 text-[12px]">
+            <table className="border-separate border-spacing-1 text-micro">
               <thead>
                 <tr>
                   <th />
@@ -251,10 +251,10 @@ export function StepParameters({ draft, update }: { draft: Draft; update: Update
         </div>
         <div className="max-w-2xl">
           <div className="eyebrow mb-1">Persistence</div>
-          <p className="mb-4 text-[13px] text-muted">How quickly carried-over stress builds up and fades.</p>
-          <table className="w-full text-[13px]">
+          <p className="mb-4 text-small text-muted">How quickly carried-over stress builds up and fades.</p>
+          <table className="w-full text-small">
             <thead>
-              <tr className="text-left text-[12px] text-muted">
+              <tr className="text-left text-micro text-muted">
                 <th className="pb-2 font-semibold">Component</th>
                 <th className="w-28 pb-2 text-right font-semibold">Build-up</th>
                 <th className="w-28 pb-2 text-right font-semibold">Fade</th>
@@ -352,7 +352,7 @@ export function StepReview({ draft, goTo }: { draft: Draft; goTo: (step: number)
           ["Imputed values", `${nImputed} of ${nCells}`],
         ].map(([k, v]) => (
           <div key={k} className="rounded-xl border border-line px-4 py-3">
-            <div className="text-[12px] text-muted">{k}</div>
+            <div className="text-micro text-muted">{k}</div>
             <div className="display-num truncate text-[1.4rem]">{v}</div>
           </div>
         ))}
@@ -363,7 +363,7 @@ export function StepReview({ draft, goTo }: { draft: Draft; goTo: (step: number)
           <div className="mb-2 flex items-center gap-2 font-medium text-evergreen dark:text-ink">
             <CircleAlert className="size-4" /> {issues.length} thing{issues.length > 1 ? "s" : ""} to fix before saving
           </div>
-          <ul className="space-y-1 text-[13px]">
+          <ul className="space-y-1 text-small">
             {issues.slice(0, 12).map((i, k) => (
               <li key={k} className="flex items-center gap-2">
                 <button type="button" onClick={() => goTo(i.step)} className="inline-flex items-center gap-1 font-medium underline underline-offset-4">
@@ -417,7 +417,7 @@ export function StepReview({ draft, goTo }: { draft: Draft; goTo: (step: number)
 function PreviewStat({ label, value, extra }: { label: string; value: string; extra?: React.ReactNode }) {
   return (
     <div className="rounded-xl border border-line px-4 py-3">
-      <div className="text-[12px] text-muted">{label}</div>
+      <div className="text-micro text-muted">{label}</div>
       <div className="display-num text-[1.9rem] leading-tight">{value}</div>
       {extra ? <div className="mt-1">{extra}</div> : null}
     </div>

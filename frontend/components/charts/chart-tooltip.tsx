@@ -26,14 +26,14 @@ export function TooltipCard({
   return (
     <div
       className={cn(
-        "pointer-events-none min-w-[180px] max-w-[300px] rounded-[2px] border border-rule-strong bg-surface px-3 py-2.5 text-ink shadow-lg",
+        "pointer-events-none min-w-[180px] max-w-[300px] rounded-sm border border-rule-strong bg-surface px-3 py-2.5 text-ink shadow-lg",
         className,
       )}
     >
-      {title ? <div className="mb-1.5 text-[13px] font-semibold leading-snug">{title}</div> : null}
+      {title ? <div className="mb-1.5 text-small font-semibold leading-snug">{title}</div> : null}
       <div className="space-y-1">
         {rows.map((r, i) => (
-          <div key={i} className="flex items-center gap-3 text-[12px]">
+          <div key={i} className="flex items-center gap-3 text-micro">
             {r.color ? (
               <span
                 aria-hidden
@@ -50,7 +50,7 @@ export function TooltipCard({
         ))}
       </div>
       {footer ? (
-        <div className="mt-2 border-t border-rule pt-1.5 text-[12px] text-ink-subtle">
+        <div className="mt-2 border-t border-rule pt-1.5 text-micro text-ink-subtle">
           {footer}
         </div>
       ) : null}

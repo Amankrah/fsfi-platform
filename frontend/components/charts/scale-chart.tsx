@@ -71,7 +71,7 @@ export function ScaleChart({
           allowDataOverflow
           {...axisProps}
           tickFormatter={(v: number) => `${v}×`}
-          label={{ value: `Budget, multiple of ${scale.reference_year}`, position: "insideBottom", offset: -4, fill: "var(--ink-78)", fontSize: 12 }}
+          label={{ value: `Budget, multiple of ${scale.reference_year}`, position: "insideBottom", offset: -4, fill: "var(--ink-78)", fontSize: 13 }}
           height={44}
         />
         <YAxis domain={[0, 1]} {...yAxisProps} ticks={[0, 0.2, 0.4, 0.6, 0.8, 1]} tickFormatter={(v: number) => v.toFixed(1)} />
@@ -111,7 +111,7 @@ export function ScaleChart({
                 isRef || i === 0
                   ? (props: { x?: number | string; y?: number | string; index?: number }) =>
                       props.index === data.length - 1 ? (
-                        <text x={Number(props.x) + 6} y={Number(props.y)} dy="0.35em" fontSize={12} fill="var(--ink-78)">
+                        <text x={Number(props.x) + 6} y={Number(props.y)} dy="0.35em" fontSize={13} fill="var(--ink-78)">
                           {c.year}
                         </text>
                       ) : (

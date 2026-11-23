@@ -34,13 +34,13 @@ export function Heatmap({
   const mx = max ?? Math.max(1e-9, ...flat);
   return (
     <div className={cn("w-full overflow-x-auto", className)}>
-      <table className="w-full border-separate border-spacing-[3px] text-[12px] tabular">
+      <table className="w-full border-separate border-spacing-[3px] text-micro tabular">
         {caption ? <caption className="sr-only">{caption}</caption> : null}
         <thead>
           <tr>
-            <th className="w-40 pb-1 text-left text-[12px] font-semibold text-muted">{rowHeader}</th>
+            <th className="w-40 pb-1 text-left text-micro font-semibold text-muted">{rowHeader}</th>
             {cols.map((c) => (
-              <th key={c} scope="col" className="pb-1 text-center text-[12px] font-medium text-muted">
+              <th key={c} scope="col" className="pb-1 text-center text-micro font-medium text-muted">
                 {c}
               </th>
             ))}
@@ -49,7 +49,7 @@ export function Heatmap({
         <tbody>
           {rows.map((r, i) => (
             <tr key={r}>
-              <th scope="row" className="whitespace-nowrap pr-3 text-left text-[12.5px] font-normal text-ink">
+              <th scope="row" className="whitespace-nowrap pr-3 text-left text-micro font-normal text-ink">
                 {r}
               </th>
               {cols.map((c, j) => {
@@ -74,7 +74,7 @@ export function Heatmap({
           ))}
         </tbody>
       </table>
-      {colHeader ? <div className="mt-2 text-center text-[12px] text-muted">{colHeader}</div> : null}
+      {colHeader ? <div className="mt-2 text-center text-micro text-muted">{colHeader}</div> : null}
       <HeatLegend max={mx} format={format} />
     </div>
   );
@@ -83,7 +83,7 @@ export function Heatmap({
 export function HeatLegend({ max, format }: { max: number; format: (v: number) => string }) {
   const stops = Array.from({ length: 24 }, (_, i) => i / 23);
   return (
-    <div className="mt-3 flex items-center gap-2 text-[12px] text-muted">
+    <div className="mt-3 flex items-center gap-2 text-micro text-muted">
       <span className="tabular">{format(0)}</span>
       <div className="flex h-2 w-40 overflow-hidden rounded-full">
         {stops.map((s) => (

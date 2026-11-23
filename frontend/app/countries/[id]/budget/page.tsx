@@ -126,10 +126,10 @@ export default function BudgetPage() {
                         <span className="block truncate font-medium" title={l.line}>
                           {l.line}
                         </span>
-                        <span className="block truncate text-[12px] text-muted">
+                        <span className="block truncate text-micro text-muted">
                           {l.agency} · {l.sub_programme}
                           {l.budget_tag ? (
-                            <Badge tone={l.budget_tag === "external" ? "accent" : "neutral"} className="ml-2 py-0 text-[12px]">
+                            <Badge tone={l.budget_tag === "external" ? "accent" : "neutral"} className="ml-2 py-0 text-micro">
                               {l.budget_tag}
                             </Badge>
                           ) : null}
@@ -142,16 +142,16 @@ export default function BudgetPage() {
                             {l.component && styles[l.component] ? (
                               <MarkerGlyph shape={styles[l.component].shape} fill={styles[l.component].fill} size={11} />
                             ) : null}
-                            <span className="whitespace-nowrap font-mono text-[12px]">{l.indicator}</span>
-                            {l.line_class ? <span className="text-[12px] text-muted">{l.line_class}</span> : null}
+                            <span className="whitespace-nowrap font-mono text-micro">{l.indicator}</span>
+                            {l.line_class ? <span className="text-micro text-muted">{l.line_class}</span> : null}
                           </span>
                         ) : (
-                          <span className="text-[12px] text-muted">unassigned</span>
+                          <span className="text-micro text-muted">unassigned</span>
                         )}
                       </Td>
-                      <Td className="whitespace-nowrap text-[12px] text-muted">
+                      <Td className="whitespace-nowrap text-micro text-muted">
                         {l.stage ? stageLabel(l.stage) : "n/a"}
-                        {l.rule ? <span className="block font-mono text-[12px]">{l.rule}</span> : null}
+                        {l.rule ? <span className="block font-mono text-micro">{l.rule}</span> : null}
                       </Td>
                       <Td className="text-right">{fmtMoney(l.amount, undefined, 2)}</Td>
                     </Tr>
@@ -159,7 +159,7 @@ export default function BudgetPage() {
                 </tbody>
               </Table>
             )}
-            <div className="flex items-center justify-between text-[12.5px] text-muted">
+            <div className="flex items-center justify-between text-micro text-muted">
               <span className="tabular">
                 {total.toLocaleString()} lines · page {page} of {pages}
               </span>
@@ -182,7 +182,7 @@ export default function BudgetPage() {
               {byComp.length === 0 ? <p className="text-sm text-muted">No budget lines are stored for this country. Upload a budget file below to map one.</p> : null}
               {byComp.map(([cid, amt]) => (
                 <div key={cid}>
-                  <div className="flex items-center justify-between text-[12.5px]">
+                  <div className="flex items-center justify-between text-micro">
                     <span className="flex items-center gap-2">
                       {styles[cid] ? <MarkerGlyph shape={styles[cid].shape} fill={styles[cid].fill} size={11} /> : null}
                       {cid === "__none" ? <span className="text-muted">Unassigned</span> : componentName(cid)}
@@ -204,8 +204,8 @@ export default function BudgetPage() {
                   {stages.map(([s, n]) => (
                     <Tr key={s}>
                       <Td>{stageLabel(s)}</Td>
-                      <Td className="text-right text-muted">{n} lines</Td>
-                      <Td className="text-right">
+                      <Td className="whitespace-nowrap text-right text-muted">{n} lines</Td>
+                      <Td className="whitespace-nowrap text-right">
                         {fmtPct(yearLines.filter((l) => (l.stage ?? "n/a") === s).reduce((a, l) => a + l.amount, 0) / (totalAmt || 1), 1)}
                       </Td>
                     </Tr>
@@ -260,7 +260,7 @@ function ChipRow({
   if (!items.length) return null;
   return (
     <div className="flex flex-wrap items-center gap-1.5">
-      <span className="mr-1 w-20 text-[12px] font-semibold text-ink-subtle">{label}</span>
+      <span className="mr-1 w-20 text-micro font-semibold text-ink-subtle">{label}</span>
       {items.map(([k, n, text]) => {
         const on = active === k;
         return (
@@ -270,7 +270,7 @@ function ChipRow({
             aria-pressed={on}
             onClick={() => onPick(on ? null : k)}
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] transition-colors",
+              "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-micro transition-colors",
               on ? "border-evergreen bg-evergreen text-white" : "border-rule-strong bg-surface text-ink hover:bg-ink-6",
             )}
           >
@@ -380,7 +380,7 @@ function MapperUpload() {
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className={cn("border-l-2 border-evergreen bg-surface px-4 py-2", accent && "border-alert")}>
-      <div className="text-[12px] text-muted">{label}</div>
+      <div className="text-micro text-muted">{label}</div>
       <div className="display-num text-[1.35rem]">{value}</div>
     </div>
   );

@@ -11,55 +11,69 @@ this file and the brief differ, the brief wins and this file should be corrected
   static content, the brief's tokens throughout.
 - TanStack Table v8 for every data grid (`components/data-table.tsx`).
 - Recharts 3 for charts, always inside the one shared `Figure` component (`components/charts/figure.tsx`).
-- `next/font/google` for Source Serif 4 (headings), IBM Plex Sans (UI, body, tables) and IBM Plex Mono (codes).
+- `next/font/google` for Inter (all screen text and figures), IBM Plex Mono (indicator codes and mapping rules) and
+  Source Serif 4 (printed pages only).
   Self-hosted at build time.
 - Removed: `motion` (all animation), the dark-mode toggle, gradients, glass and blur effects, grain textures, count-up
   numbers, pill buttons and decorative icons.
 
 ## Tokens (`app/globals.css`)
 
+Cool slate neutrals carry most of the screen; there is one brand colour (forest green), one second data colour (steel
+blue) and amber for highlights only. Red and green are kept for meaning and are not used as decoration.
+
 | Token | Hex | Use |
 |---|---|---|
-| `--paper` | `#FBF8F2` | Page background |
-| `--ivory` | `#F6F1E7` | Alternate bands, side navigation, table header fill |
-| `--surface` | `#FFFFFF` | Tables, panels, inputs, figures |
-| `--ink` | `#1F2A27` | Body text (13.96:1 on paper) |
-| `--ink-muted` | `#4A5A55` | Secondary text |
-| `--ink-subtle` | `#5C6B66` | Metadata, axis labels; the lightest text colour allowed |
-| `--evergreen` | `#0F3D33` | Headings, navigation bar, primary buttons, focus ring |
-| `--saffron-bright` | `#C9A227` | Decorative accent on evergreen only (active navigation marker) |
-| `--saffron` / `--saffron-mark` | `#9A7814` | Saffron chart marks on light backgrounds (3.68:1) |
-| `--saffron-ink` | `#7A5F0E` | Saffron-family text on light (synthetic-data badge) |
-| `--green-700` | `#2C5B4D` | Links, secondary series |
-| `--green-500` | `#5F8476` | Lighter series |
-| `--neutral-mark` | `#7F8C88` | Reference marks, "at benchmark" |
-| `--alert` | `#B8461F` | Unfunded gap, critical stress, errors |
-| `--rule` | `#E6DDCB` | Decorative dividers and table row lines |
-| `--rule-strong` | `#8C8574` | Input borders and chart axes (3.26:1) |
+| `--paper` | `#F6F8FA` | Page background |
+| `--ivory` | `#EEF2F6` | Panels, side navigation, table header fill |
+| `--surface` | `#FFFFFF` | Tables, cards, inputs, figures |
+| `--ink` | `#111C2D` | Body text (16.1:1 on paper) |
+| `--ink-muted` | `#3F4D60` | Secondary text (7.6:1 on ivory) |
+| `--ink-subtle` | `#586579` | Metadata, axis labels; the lightest text colour allowed (5.3:1 on ivory) |
+| `--evergreen` | `#0E3B2E` | Brand: headings, navigation bar, primary buttons, focus ring |
+| `--green-700` | `#17634C` | Links (6.4:1 on ivory) |
+| `--steel` | `#2F5D8C` | Second data colour: budget share, draft, shift towards the optimum |
+| `--saffron-bright` | `#D9A93A` | Decorative accent on evergreen only (active navigation marker) |
+| `--saffron` / `--saffron-mark` | `#9A6208` | Amber highlight marks and reference lines (4.8:1 on paper) |
+| `--saffron-ink` | `#7F5206` | Amber text on light (synthetic-data badge) |
+| `--neutral-mark` | `#758396` | Reference marks, money given up at the optimum, low stress |
+| `--alert` | `#B42318` | Errors |
+| `--positive` / `--warning` | `#047857` / `#C4520E` | Semantic only |
+| `--rule` | `#E1E6ED` | Dividers and table row lines |
+| `--rule-strong` | `#7D8CA0` | Input borders and chart axes (3.2:1 on paper) |
 
 Older chart code still uses `--canvas`, `--line` and `--ink-N`; these are aliases of the tokens above.
 
-**Diagnosis and stress classes.** Unfunded gap / critical: `--alert`. Partially funded / medium: `--green-500`.
-Funded / high: `--evergreen`. At benchmark / low: `--neutral-mark`, drawn hollow (outline on white) wherever it sits
-beside filled marks. The three filled colours pass the `dataviz` validator for CVD and normal-vision separation
-(worst pair ΔE 10.4 deutan, 19.4 normal). The validator flags the brand ramp's low chroma and evergreen's lightness as
-outside its categorical band; that is accepted because the classes are ordinal and are always labelled in text
-(badges, direct labels, legends), so colour never carries meaning alone.
+**Diagnosis.** Unfunded gap `#B42318` (red), partially funded `#D9A13B` (light amber, ink text on the fill), funded
+gap `#1F64A8` (blue), at benchmark `#047857` (green). **Stress classes** form a ramp that darkens with severity: low
+`--neutral-mark` drawn hollow, medium `#D9A13B`, high `#C4520E`, critical `#8E1B12`. Both sets pass the `dataviz`
+validator for colour-vision-deficient and normal-vision separation (diagnosis: worst adjacent pair ΔE 15.1 deutan,
+16.0 normal). The light amber sits at 2.3:1 on white, so it never appears without a text label, and every chart has a
+table view. Reallocation charts use steel (receives money) and slate (gives money up), so that red, amber and green
+keep their diagnostic meaning.
 
 **Heatmaps** use one hue, evergreen over white. The middle of the ramp is skipped so each cell's number keeps 4.5:1
 (ink on the light half, white on the dark half).
 
-**Elevation.** One shadow (`--elevation`) for popovers, menus and dialogs only; `shadow-sm`/`md` resolve to none.
+**Elevation and corners.** Cards carry a faint `shadow-sm`; popovers, menus and dialogs use `--elevation`. Corners are 4 px
+on controls and badges, 6 px on inputs and 8 px on cards.
 
 **Focus.** 2 px evergreen outline with a 2 px paper offset on every interactive element; saffron outline on the
 evergreen header. `scroll-padding` keeps focused targets clear of the sticky header and the draft-scoring footer.
 
 ## Type
 
-Source Serif 4 for `h1`/`h2` and the landing statement; IBM Plex Sans for everything else. Scale classes `t-display`,
-`t-h1`, `t-h2`, `t-h3`, `t-h4`, `t-lead`, `t-ui`, `t-caption`, `t-micro` follow brief §5.3. Tables, charts, KPIs and the
-context bar use `tabular-nums lining-nums`. No chart or table text is below 12 px. Reading text sits in a 68-character
-measure.
+Inter for every heading, label, table and figure. It is a neo-grotesque drawn for screens, with tabular lining figures,
+and two character variants are switched on to separate look-alike glyphs: `cv05` (l with a tail) and `cv08` (I with
+serifs). Tables, chart axes, KPIs and numeric inputs use `tabular-nums lining-nums slashed-zero`, so columns align and 0
+reads differently from O. IBM Plex Mono is kept for indicator codes and mapping rules. Printed pages are set in Source
+Serif 4.
+
+Scale: 13 px (`text-micro`, `text-xs`: axis ticks, badges, table headers), 14 px (`text-small`, `t-caption`), 15 px
+(`text-ui`, `t-ui`: controls, navigation, table body), 16 px body, 18 px lead, then `t-h4` 17, `t-h3` 20, `t-h2` 28,
+`t-h1` 36 and `t-display` 48 px on wide screens. Nothing on screen is set below 13 px. Headings are semibold with
+slightly tightened tracking. Reading text sits in a 68-character measure. The custom size names are registered with
+`tailwind-merge` in `lib/utils.ts`; without that, `cn()` reads them as colours and drops one of a size/colour pair.
 
 ## Components
 

@@ -1,5 +1,11 @@
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+// The site's own type-scale sizes (globals.css @theme) must be known to tailwind-merge as font sizes;
+// otherwise it reads them as text colours and drops one of a size/colour pair.
+const twMerge = extendTailwindMerge({
+  extend: { theme: { text: ["micro", "small", "ui"] } },
+});
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

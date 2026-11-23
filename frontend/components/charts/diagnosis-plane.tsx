@@ -114,7 +114,7 @@ export function DiagnosisPlane({
             {ticks.map((t) => (
               <g key={t}>
                 <line x1={m.left} x2={m.left + iw} y1={y(t)} y2={y(t)} stroke="var(--line)" />
-                <text x={m.left - 10} y={y(t)} dy="0.32em" textAnchor="end" className="fill-[var(--ink-subtle)] text-[12px] tabular">
+                <text x={m.left - 10} y={y(t)} dy="0.32em" textAnchor="end" className="fill-[var(--ink-subtle)] text-micro tabular">
                   {t.toFixed(1)}
                 </text>
               </g>
@@ -122,7 +122,7 @@ export function DiagnosisPlane({
             <text
               transform={`translate(12 ${m.top + ih / 2}) rotate(-90)`}
               textAnchor="middle"
-              className="fill-[var(--ink-subtle)] text-[12px]"
+              className="fill-[var(--ink-subtle)] text-micro"
             >
               Performance gap
             </text>
@@ -138,7 +138,7 @@ export function DiagnosisPlane({
               const narrow = colW[k] < 130;
               return (
                 <g key={k}>
-                  <text x={cx} y={14} textAnchor="middle" className="fill-[var(--ink)] text-[13px] font-semibold">
+                  <text x={cx} y={14} textAnchor="middle" className="fill-[var(--ink)] text-small font-semibold">
                     {narrow ? h.title.split(" ")[0] : h.title}
                   </text>
                   {s ? (
@@ -146,19 +146,19 @@ export function DiagnosisPlane({
                       x={cx}
                       y={32}
                       textAnchor="middle"
-                      className={k === 0 ? "fill-[var(--alert)] text-[12px] font-semibold tabular" : "fill-[var(--ink-subtle)] text-[12px] tabular"}
+                      className={k === 0 ? "fill-[var(--alert)] text-micro font-semibold tabular" : "fill-[var(--ink-subtle)] text-micro tabular"}
                     >
                       {s.count} {narrow ? "ind." : s.count === 1 ? "indicator" : "indicators"}
                     </text>
                   ) : null}
-                  <text x={cx} y={height - 12} textAnchor="middle" className="fill-[var(--ink-subtle)] text-[12px] tabular">
+                  <text x={cx} y={height - 12} textAnchor="middle" className="fill-[var(--ink-subtle)] text-micro tabular">
                     {h.range}
                   </text>
                 </g>
               );
             })}
             {atb ? (
-              <text x={m.left + iw - 8} y={y(b1) + 14} textAnchor="end" className="fill-[var(--ink-subtle)] text-[12px] tabular">
+              <text x={m.left + iw - 8} y={y(b1) + 14} textAnchor="end" className="fill-[var(--ink-subtle)] text-micro tabular">
                 At or near benchmark · {atb.count}
               </text>
             ) : null}
@@ -231,13 +231,13 @@ export function DiagnosisPlane({
         {components.map((c) => {
           const st = styles[c.id];
           return (
-            <span key={c.id} className="inline-flex items-center gap-1.5 text-[12px] text-ink-muted">
+            <span key={c.id} className="inline-flex items-center gap-1.5 text-micro text-ink-muted">
               <MarkerGlyph shape={st.shape} fill={st.fill} size={13} />
               {c.name}
             </span>
           );
         })}
-        <span className="inline-flex items-center gap-1.5 text-[12px] text-ink-muted">
+        <span className="inline-flex items-center gap-1.5 text-micro text-ink-muted">
           <MarkerGlyph shape="circle" fill="var(--ink-40)" size={13} imputed />
           Imputed
         </span>

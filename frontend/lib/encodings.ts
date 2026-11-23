@@ -30,7 +30,7 @@ export const diagnosisColor: Record<Diagnosis, string> = {
 /** Text colour that stays legible on top of the diagnosis fill. */
 export const diagnosisOnColor: Record<Diagnosis, string> = {
   at_benchmark: "#ffffff",
-  partially_funded_gap: "#ffffff",
+  partially_funded_gap: "var(--ink)",
   funded_gap: "#ffffff",
   unfunded_gap: "#ffffff",
 };

@@ -115,13 +115,13 @@ export default function BuilderPage() {
                           onClick={() => setStep(i)}
                           aria-current={active ? "step" : undefined}
                           className={cn(
-                            "relative flex items-center gap-2.5 px-2 py-4 text-[14px] transition-colors",
+                            "relative flex items-center gap-2.5 px-2 py-4 text-small transition-colors",
                             active ? "font-medium text-ink" : done ? "text-ink" : "text-ink-muted hover:text-ink",
                           )}
                         >
                           <span
                             className={cn(
-                              "grid size-6 shrink-0 place-items-center rounded-full border text-[12px] font-semibold tabular",
+                              "grid size-6 shrink-0 place-items-center rounded-full border text-micro font-semibold tabular",
                               active
                                 ? "border-evergreen bg-evergreen text-white"
                                 : done

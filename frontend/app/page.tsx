@@ -70,7 +70,7 @@ export default function Landing() {
         <ol className="max-w-[68ch] divide-y divide-rule border-y border-rule">
           {QUESTIONS.map((x, i) => (
             <li key={x.q} className="flex gap-4 py-4">
-              <span className="w-6 shrink-0 font-serif text-[1.25rem] text-evergreen tabular">{i + 1}</span>
+              <span className="w-6 shrink-0 text-[1.25rem] text-evergreen tabular">{i + 1}</span>
               <div>
                 <p className="text-[1.0625rem] text-ink">{x.q}</p>
                 <Link href={x.href} className="link mt-1 inline-block t-ui">

@@ -154,7 +154,7 @@ export function LegendItem({
   marker?: React.ReactNode;
 }) {
   return (
-    <span className="inline-flex items-center gap-2 text-[12px] text-ink-muted">
+    <span className="inline-flex items-center gap-2 text-micro text-ink-muted">
       {marker ?? (
         <svg width="22" height="8" aria-hidden>
           <line

@@ -241,7 +241,7 @@ export default function DataPage() {
                     <tbody>
                       {d.fields.map(([k, v]) => (
                         <Tr key={k}>
-                          <Td className="font-mono text-[13px]">{k}</Td>
+                          <Td className="font-mono text-small">{k}</Td>
                           <Td>{v}</Td>
                         </Tr>
                       ))}
@@ -262,7 +262,7 @@ export default function DataPage() {
             <code className="font-mono text-[0.9em]">year</code>, <code className="font-mono text-[0.9em]">weighting</code>,{" "}
             <code className="font-mono text-[0.9em]">scenario</code> and <code className="font-mono text-[0.9em]">response</code>. For example:
           </p>
-          <pre className="mt-3 overflow-x-auto border border-rule bg-surface p-3 font-mono text-[13px] text-ink">
+          <pre className="mt-3 overflow-x-auto border border-rule bg-surface p-3 font-mono text-small text-ink">
             {`GET ${API_BASE}/countries/{id}/assessment?year={year}&weighting=equal`}
           </pre>
           <p className="mt-3 t-ui text-ink-muted">Each chart on the site also offers its plotted data as CSV from its Download tab.</p>

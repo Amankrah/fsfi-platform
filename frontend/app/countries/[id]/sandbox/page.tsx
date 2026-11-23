@@ -172,21 +172,21 @@ function Sandbox({ a, currency }: { a: Assessment; currency: string }) {
             {changed ? "; the draft differs from the enacted budget." : "; the draft equals the enacted budget."}
           </div>
 
-          <div className="mt-3 overflow-x-auto rounded-[2px] border border-rule bg-surface">
+          <div className="mt-3 overflow-x-auto rounded-sm border border-rule bg-surface">
             <table className="w-full min-w-[560px] border-collapse t-ui tabular">
               <caption className="sr-only">Draft component shares</caption>
               <thead>
                 <tr>
-                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-left text-[12px] font-semibold text-ink-muted">
+                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-left text-micro font-semibold text-ink-muted">
                     Component
                   </th>
-                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-left text-[12px] font-semibold text-ink-muted">
+                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-left text-micro font-semibold text-ink-muted">
                     Share
                   </th>
-                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-right text-[12px] font-semibold text-ink-muted">
+                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-right text-micro font-semibold text-ink-muted">
                     Draft (%)
                   </th>
-                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-right text-[12px] font-semibold text-ink-muted">
+                  <th scope="col" className="border-b border-rule-strong bg-ivory px-3 py-1.5 text-right text-micro font-semibold text-ink-muted">
                     Change (pp)
                   </th>
                 </tr>
@@ -216,7 +216,7 @@ function Sandbox({ a, currency }: { a: Assessment; currency: string }) {
                             const n = Number(e.target.value);
                             if (Number.isFinite(n)) setShares((s) => rebalance(s, c.id, n / 100));
                           }}
-                          className="h-8 w-20 rounded-[2px] border border-rule-strong bg-surface px-2 text-right"
+                          className="h-8 w-20 rounded-sm border border-rule-strong bg-surface px-2 text-right"
                         />
                       </td>
                       <td className={cn("border-b border-rule px-3 py-1.5 text-right", Math.abs(diff) < 0.05 ? "text-ink-subtle" : "font-medium text-ink")}>
@@ -246,7 +246,7 @@ function Sandbox({ a, currency }: { a: Assessment; currency: string }) {
                   const n = Number(e.target.value);
                   if (Number.isFinite(n) && n > 0) setMult(Math.min(8, Math.max(0.25, n)));
                 }}
-                className="h-8 w-20 rounded-[2px] border border-rule-strong bg-surface px-2 text-right"
+                className="h-8 w-20 rounded-sm border border-rule-strong bg-surface px-2 text-right"
               />
               × = {fmtMoney(a.system.envelope * mult, currency)}
             </span>
@@ -359,7 +359,7 @@ function BulletBars({ rows }: { rows: ChangeRow[] }) {
   return (
     <div>
       <div className="mb-3 flex flex-wrap gap-5">
-        <LegendItem marker={<span className="h-2.5 w-4 bg-green-500" />} label="Draft" />
+        <LegendItem marker={<span className="h-2.5 w-4 bg-steel" />} label="Draft" />
         <LegendItem marker={<span className="h-3.5 w-[3px] bg-ink" />} label="Enacted" />
       </div>
       <ul className="space-y-2">
@@ -370,7 +370,7 @@ function BulletBars({ rows }: { rows: ChangeRow[] }) {
             </span>
             <span className="relative h-4" aria-hidden>
               <span className="absolute inset-y-[3px] left-0 right-0 bg-ink-6" />
-              <span className="absolute inset-y-[3px] left-0 bg-green-500" style={{ width: `${(r.stressDraft / max) * 100}%` }} />
+              <span className="absolute inset-y-[3px] left-0 bg-steel" style={{ width: `${(r.stressDraft / max) * 100}%` }} />
               <span className="absolute inset-y-0 w-[3px] -translate-x-1/2 bg-ink" style={{ left: `${(r.stressEnacted / max) * 100}%` }} />
             </span>
             <span className="text-right tabular text-ink">{fmtIndex(r.stressDraft)}</span>

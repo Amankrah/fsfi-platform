@@ -8,12 +8,12 @@ import { cn } from "@/lib/utils";
  * Legacy variant names (accent, ghost, subtle) map onto the three variants in the brief.
  */
 export const buttonVariants = cva(
-  "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-[2px] font-medium transition-colors duration-150 ease-out disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-sm font-medium transition-colors duration-150 ease-out disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary: "bg-evergreen text-white hover:bg-[#0b2f27]",
-        accent: "bg-evergreen text-white hover:bg-[#0b2f27]",
+        primary: "bg-evergreen text-white hover:bg-evergreen-hover",
+        accent: "bg-evergreen text-white hover:bg-evergreen-hover",
         secondary: "border border-rule-strong bg-surface text-evergreen hover:bg-ivory",
         outline: "border border-rule-strong bg-surface text-evergreen hover:bg-ivory",
         quiet: "bg-transparent text-green-700 hover:bg-ink-4 hover:text-evergreen",
@@ -23,9 +23,9 @@ export const buttonVariants = cva(
         "inverse-outline": "on-dark border border-white/80 text-white hover:bg-white/10",
       },
       size: {
-        sm: "h-8 px-3 text-[13px]",
+        sm: "h-8 px-3 text-small",
         md: "h-10 px-4 text-sm",
-        lg: "h-11 px-5 text-[15px]",
+        lg: "h-11 px-5 text-ui",
         icon: "h-9 w-9",
       },
     },

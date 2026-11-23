@@ -36,7 +36,7 @@ export function Sheet({
               <D.Title className="t-h2 text-evergreen">{title}</D.Title>
               {description ? <D.Description className="mt-1 t-ui text-ink-muted">{description}</D.Description> : null}
             </div>
-            <D.Close className="rounded-[2px] p-1.5 text-ink-muted hover:bg-ink-6 hover:text-ink" aria-label="Close">
+            <D.Close className="rounded-sm p-1.5 text-ink-muted hover:bg-ink-6 hover:text-ink" aria-label="Close">
               <X className="size-5" strokeWidth={1.5} />
             </D.Close>
           </div>
@@ -69,7 +69,7 @@ export function Modal({
           <D.Title className="t-h2 text-evergreen">{title}</D.Title>
           {description ? <D.Description className="mt-1 t-ui text-ink-muted">{description}</D.Description> : null}
           <div className="mt-5">{children}</div>
-          <D.Close className="absolute right-4 top-4 rounded-[2px] p-1.5 text-ink-muted hover:bg-ink-6" aria-label="Close">
+          <D.Close className="absolute right-4 top-4 rounded-sm p-1.5 text-ink-muted hover:bg-ink-6" aria-label="Close">
             <X className="size-4" strokeWidth={1.5} />
           </D.Close>
         </D.Content>

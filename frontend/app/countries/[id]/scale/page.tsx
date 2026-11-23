@@ -78,7 +78,7 @@ export default function ScalePage() {
                 onFocus={() => setHl(c.year)}
                 onBlur={() => setHl(null)}
                 className={cn(
-                  "h-7 min-w-[28px] rounded-[2px] border border-rule-strong px-2 text-[12px] tabular",
+                  "h-7 min-w-[28px] rounded-sm border border-rule-strong px-2 text-micro tabular",
                   c.year === ref?.year ? "bg-evergreen text-white" : "bg-surface text-ink-muted hover:text-ink",
                 )}
               >

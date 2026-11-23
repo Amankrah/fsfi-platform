@@ -44,7 +44,7 @@ export default function IndicatorsPage() {
 
   const columns = React.useMemo<ColumnSpec<IndicatorResult>[]>(
     () => [
-      { key: "code", header: "Code", value: (d) => d.code, className: "whitespace-nowrap font-mono text-[13px]" },
+      { key: "code", header: "Code", value: (d) => d.code, className: "whitespace-nowrap font-mono text-small" },
       {
         key: "name",
         header: "Indicator",
@@ -88,7 +88,7 @@ export default function IndicatorsPage() {
     <div className="space-y-6">
       <div className="border-b border-rule pb-4" role="group" aria-label="Filters">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="whitespace-nowrap pr-1 text-[13px] text-muted tabular">
+          <span className="whitespace-nowrap pr-1 text-small text-muted tabular">
             {a.indicators.length} indicators{nImp ? ` · ${nImp} imputed` : ""}
           </span>
           <div className="relative min-w-[220px] flex-1">
@@ -184,7 +184,7 @@ function IndicatorDrawer({ ind }: { ind: IndicatorResult }) {
           ["Optimal share", fmtPct(ind.optimal_share, 1)],
         ].map(([k, v]) => (
           <div key={k} className="bg-canvas px-4 py-3">
-            <dt className="text-[12px] text-muted">{k}</dt>
+            <dt className="text-micro text-muted">{k}</dt>
             <dd className="display-num text-[1.5rem]">{v}</dd>
           </div>
         ))}

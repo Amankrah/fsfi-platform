@@ -37,12 +37,12 @@ export function Dumbbell({ rows, components }: { rows: ComponentResult[]; compon
           {ticks.map((t) => (
             <g key={t}>
               <line x1={x(t)} x2={x(t)} y1={m.top - 8} y2={H - m.bottom + 4} stroke="var(--line)" />
-              <text x={x(t)} y={H - m.bottom + 20} textAnchor="middle" className="fill-[var(--ink-subtle)] text-[12px] tabular">
+              <text x={x(t)} y={H - m.bottom + 20} textAnchor="middle" className="fill-[var(--ink-subtle)] text-micro tabular">
                 {Math.round(t * 100)}%
               </text>
             </g>
           ))}
-          <text x={W - 8} y={12} textAnchor="end" className="fill-[var(--ink-subtle)] text-[12px] font-semibold">
+          <text x={W - 8} y={12} textAnchor="end" className="fill-[var(--ink-subtle)] text-micro font-semibold">
             Shift (pp)
           </text>
 
@@ -56,7 +56,7 @@ export function Dumbbell({ rows, components }: { rows: ComponentResult[]; compon
               <g key={r.id}>
                 <line x1={labelW} x2={labelW + iw} y1={cy} y2={cy} stroke="var(--line)" strokeDasharray="1 4" />
                 <foreignObject x={0} y={cy - 11} width={labelW - 12} height={22}>
-                  <div className="flex h-full items-center gap-2 text-[13px] text-ink">
+                  <div className="flex h-full items-center gap-2 text-small text-ink">
                     {st ? <MarkerGlyph shape={st.shape} fill={st.fill} size={12} /> : null}
                     <span className="truncate">{r.name}</span>
                   </div>
@@ -81,7 +81,7 @@ export function Dumbbell({ rows, components }: { rows: ComponentResult[]; compon
                   y={cy}
                   dy="0.35em"
                   textAnchor="end"
-                  className={`text-[13px] tabular ${r.shift_pp > 0 ? "fill-[var(--ink)] font-semibold" : "fill-[var(--ink-subtle)]"}`}
+                  className={`text-small tabular ${r.shift_pp > 0 ? "fill-[var(--ink)] font-semibold" : "fill-[var(--ink-subtle)]"}`}
                 >
                   {fmtPp(r.shift_pp)}
                 </text>
@@ -92,7 +92,7 @@ export function Dumbbell({ rows, components }: { rows: ComponentResult[]; compon
       ) : (
         <div style={{ height: H }} />
       )}
-      <div className="mt-3 flex flex-wrap gap-5 text-[12px] text-ink-muted">
+      <div className="mt-3 flex flex-wrap gap-5 text-micro text-ink-muted">
         <span className="inline-flex items-center gap-2">
           <svg width="14" height="14" aria-hidden><circle cx="7" cy="7" r="5.5" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1.4" /></svg>
           Current

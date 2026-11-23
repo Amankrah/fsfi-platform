@@ -47,7 +47,7 @@ export function SiteHeader() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative flex items-center px-3 text-[14px] text-white/85 hover:text-white",
+                  "relative flex items-center px-3 text-small text-white/85 hover:text-white",
                   active && "text-white",
                 )}
               >
@@ -60,13 +60,13 @@ export function SiteHeader() {
         <div className="ml-auto flex items-center gap-2">
           <Link
             href="/assessments"
-            className="hidden h-9 items-center rounded-[2px] bg-white px-4 text-[14px] font-medium text-evergreen hover:bg-ivory sm:inline-flex"
+            className="hidden h-9 items-center rounded-sm bg-white px-4 text-small font-medium text-evergreen hover:bg-ivory sm:inline-flex"
           >
             Open an assessment
           </Link>
           <button
             type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-[2px] text-white hover:bg-white/10 lg:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-sm text-white hover:bg-white/10 lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((o) => !o)}
@@ -86,7 +86,7 @@ export function SiteHeader() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={cn("flex h-11 items-center text-[15px] text-white/90", active && "font-semibold text-white")}
+                    className={cn("flex h-11 items-center text-ui text-white/90", active && "font-semibold text-white")}
                   >
                     {active ? <span aria-hidden className="mr-2 h-4 w-[3px] bg-saffron-bright" /> : null}
                     {item.label}
@@ -97,7 +97,7 @@ export function SiteHeader() {
           </ul>
           <Link
             href="/assessments"
-            className="mt-3 inline-flex h-10 items-center rounded-[2px] bg-white px-4 text-[14px] font-medium text-evergreen sm:hidden"
+            className="mt-3 inline-flex h-10 items-center rounded-sm bg-white px-4 text-small font-medium text-evergreen sm:hidden"
           >
             Open an assessment
           </Link>

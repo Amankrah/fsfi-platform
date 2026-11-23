@@ -31,7 +31,7 @@ export const diagnosisColumns: ColumnSpec<DxRow>[] = [
   { key: "stress", header: "Share of stress", unit: "%", numeric: true, value: (r) => +(r.stress * 100).toFixed(1), format: (v) => v.toFixed(1) },
 ];
 
-const BUDGET = "var(--green-500)";
+const BUDGET = "var(--steel)";
 const STRESS = "var(--evergreen)";
 
 /** Paired horizontal bars, sorted by share of stress: where the money sits against where the stress sits. */
@@ -65,10 +65,10 @@ export function DiagnosisBars({ rows, height = 300 }: { rows: DxRow[]; height?: 
             }}
           />
           <Bar dataKey="budget" name="Share of budget" fill={BUDGET} isAnimationActive={false}>
-            <LabelList dataKey="budget" position="right" formatter={(v: unknown) => fmtPct(Number(v))} style={{ fill: "var(--ink-muted)", fontSize: 12 }} />
+            <LabelList dataKey="budget" position="right" formatter={(v: unknown) => fmtPct(Number(v))} style={{ fill: "var(--ink-muted)", fontSize: 13 }} />
           </Bar>
           <Bar dataKey="stress" name="Share of stress" fill={STRESS} isAnimationActive={false}>
-            <LabelList dataKey="stress" position="right" formatter={(v: unknown) => fmtPct(Number(v))} style={{ fill: "var(--ink)", fontSize: 12, fontWeight: 600 }} />
+            <LabelList dataKey="stress" position="right" formatter={(v: unknown) => fmtPct(Number(v))} style={{ fill: "var(--ink)", fontSize: 13, fontWeight: 600 }} />
           </Bar>
         </BarChart>
       </ResponsiveContainer>

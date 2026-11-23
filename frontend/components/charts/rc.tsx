@@ -5,13 +5,13 @@
 export const axisProps = {
   tickLine: false,
   axisLine: { stroke: "var(--line-strong)" },
-  tick: { fill: "var(--ink-subtle)", fontSize: 12 },
+  tick: { fill: "var(--ink-subtle)", fontSize: 13 },
 } as const;
 
 export const yAxisProps = {
   tickLine: false,
   axisLine: false,
-  tick: { fill: "var(--ink-subtle)", fontSize: 12 },
+  tick: { fill: "var(--ink-subtle)", fontSize: 13 },
   width: 44,
 } as const;
 

@@ -11,14 +11,14 @@ export function Badge({
 }: React.HTMLAttributes<HTMLSpanElement> & { tone?: "neutral" | "accent" | "solid" | "outline" }) {
   const tones = {
     neutral: "bg-ink-6 text-ink",
-    accent: "border border-[#c9b06a] bg-[#fbf3dc] text-saffron-ink",
+    accent: "border border-saffron-20 bg-saffron-12 text-saffron-ink",
     solid: "bg-evergreen text-white",
     outline: "border border-rule-strong bg-surface text-ink",
   } as const;
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-[2px] px-2 py-0.5 text-[12px] font-medium leading-4",
+        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-sm px-2 py-0.5 text-micro font-medium leading-4",
         tones[tone],
         className,
       )}

@@ -19,7 +19,7 @@ export function Th({ className, scope = "col", ...props }: React.ThHTMLAttribute
   return (
     <th
       scope={scope}
-      className={cn("border-b border-rule-strong bg-ivory px-3 py-2 text-left text-[12px] font-semibold text-ink-muted", className)}
+      className={cn("border-b border-rule-strong bg-ivory px-3 py-2 text-left text-micro font-semibold text-ink-muted", className)}
       {...props}
     />
   );

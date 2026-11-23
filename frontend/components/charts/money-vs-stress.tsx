@@ -46,10 +46,10 @@ export function MoneyVsStress({ summary, height = 300 }: { summary: DiagnosisSum
     <div ref={ref} className="w-full">
       {width > 0 ? (
         <svg width={W} height={height} role="img" aria-label="Share of budget and share of stress by diagnosis label">
-          <text x={0} y={14} className="fill-[var(--ink-muted)] text-[12px] font-semibold">
+          <text x={0} y={14} className="fill-[var(--ink-muted)] text-micro font-semibold">
             Share of budget
           </text>
-          <text x={0} y={height - 6} className="fill-[var(--ink-muted)] text-[12px] font-semibold">
+          <text x={0} y={height - 6} className="fill-[var(--ink-muted)] text-micro font-semibold">
             Share of stress
           </text>
           {segs.map(({ r, e0, e1, s0, s1 }) => {
@@ -98,7 +98,7 @@ export function MoneyVsStress({ summary, height = 300 }: { summary: DiagnosisSum
               style={{ background: diagnosisColor[r.diagnosis] }}
               aria-hidden
             />
-            <span className="text-[12px] leading-snug">
+            <span className="text-micro leading-snug">
               <span className="block font-medium text-ink">{diagnosisShort[r.diagnosis]}</span>
               <span className="block text-ink-muted tabular">
                 {r.count} ind. · {fmtPct(r.envelope_share)} → {fmtPct(r.stress_share)}
@@ -115,7 +115,7 @@ export function MoneyVsStressTable({ summary }: { summary: DiagnosisSummary[] })
   return (
     <table className="w-full text-sm tabular">
       <thead>
-        <tr className="text-left text-[12px] text-ink-muted">
+        <tr className="text-left text-micro text-ink-muted">
           <th className="border-b border-line-strong py-2 font-semibold">Label</th>
           <th className="border-b border-line-strong py-2 text-right font-semibold">Indicators</th>
           <th className="border-b border-line-strong py-2 text-right font-semibold">Budget</th>
