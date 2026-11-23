@@ -353,3 +353,143 @@ export interface Controls {
   scenario: string;
   response: ResponseForm;
 }
+
+/* ------------------------------------------------------------ planning and strategy alignment */
+
+export type PlanCurve = "linear" | "smoothstep" | "frontloaded";
+
+export interface PlanParams {
+  horizon: number;
+  target_reduction: number;
+  growth: number;
+  curve: PlanCurve;
+  pace: number;
+}
+
+export interface PlanYear {
+  year: string;
+  step: number;
+  envelope: number;
+  additional: number;
+  fsfsi: number;
+  fsfsi_acc: number;
+  year_target: number;
+  on_track: boolean;
+  bau_fsfsi: number;
+  bau_fsfsi_acc: number;
+  stress_class: StressClass;
+  components: Record<string, { share: number; stress: number; acc_stress: number }>;
+}
+
+export interface PlanComponent {
+  id: string;
+  name: string;
+  share: number;
+  end_share: number;
+  shift_pp: number;
+  stress: number;
+  acc_stress: number;
+  end_acc_stress: number;
+  bau_end_acc_stress: number;
+  change_pct: number;
+  end_class: StressClass;
+}
+
+export interface PlanSummary {
+  final_fsfsi: number;
+  final_fsfsi_acc: number;
+  bau_final_fsfsi_acc: number;
+  reduction: number;
+  bau_reduction: number;
+  reached: boolean;
+  first_year_on_target: string | null;
+  years_on_track: number;
+  cumulative_additional: number;
+  final_envelope: number;
+  required_growth: number | null;
+  composition_gain: number;
+  residual_high: string[];
+}
+
+export interface Plan {
+  country_id: string;
+  weighting: Weighting;
+  scenario: string;
+  response: ResponseForm;
+  params: PlanParams;
+  base: { year: string; fsfsi: number; fsfsi_acc: number; envelope: number; efficiency: number };
+  target: number;
+  summary: PlanSummary;
+  years: PlanYear[];
+  components: PlanComponent[];
+  assumptions: string[];
+}
+
+export type TargetStatus = "achieved" | "on_track" | "behind" | "off_track" | "no_data";
+
+export interface StrategyTarget {
+  code: string;
+  area: string;
+  indicator: string;
+  name: string;
+  component: string;
+  direction: Direction;
+  unit?: string | null;
+  baseline: number | null;
+  current: number | null;
+  benchmark: number | null;
+  target: number | null;
+  expected: number | null;
+  progress: number | null;
+  expected_progress: number;
+  status: TargetStatus;
+  stress: number | null;
+  diagnosis: Diagnosis | null;
+}
+
+export interface StrategyArea {
+  code: string;
+  name: string;
+  description: string;
+  components: { id: string; name: string }[];
+  n_indicators: number;
+  target_share: number;
+  actual_share: number;
+  optimal_share: number;
+  plan_share: number;
+  deviation_pp: number;
+  acc_stress: number;
+  plan_end_acc_stress: number;
+  bau_end_acc_stress: number;
+  plan_reduction_pct: number;
+  targets: number;
+  targets_on_track: number;
+}
+
+export interface StrategyReport {
+  country_id: string;
+  year: string;
+  strategy: { name: string; source: string; description: string; unmapped_components: string[] };
+  alignment: { actual: number; optimum: number; plan: number };
+  index: {
+    actual: number;
+    optimum: number;
+    strategy_optimum: number;
+    efficiency_actual: number;
+    efficiency_strategy: number;
+    strategy_gain: number;
+    strategy_cost: number;
+  };
+  areas: StrategyArea[];
+  history: { year: string; alignment: number; shares: Record<string, number> }[];
+  tracking: {
+    start: string;
+    target_year: string;
+    periods: number;
+    elapsed: number;
+    latest: string;
+    expected_progress: number;
+    targets: StrategyTarget[];
+  };
+  plan: { params: PlanParams; target: number; summary: PlanSummary; end_year: string };
+}

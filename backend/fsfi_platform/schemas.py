@@ -90,6 +90,7 @@ class CountryProfile(_M):
     # extensions
     ahp_matrices: Optional[Dict[str, List[List[float]]]] = None
     hybrid_coefficients: Optional[Dict[str, float]] = None
+    strategy: Optional[dict] = None  # extension: national strategy for the alignment analysis
 
 
 class CountryProfileIn(_M):
@@ -114,6 +115,7 @@ class CountryProfileIn(_M):
     updated_at: Optional[str] = None
     ahp_matrices: Optional[Dict[str, List[List[float]]]] = None
     hybrid_coefficients: Optional[Dict[str, float]] = None
+    strategy: Optional[dict] = None  # extension: national strategy for the alignment analysis
 
 
 class SummaryLatest(_M):

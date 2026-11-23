@@ -28,10 +28,14 @@ export const STEPS = [
   { slug: "optimum", label: "Reallocation", title: "Optimal reallocation" },
   { slug: "record", label: "Record", title: "Record over time" },
   { slug: "sandbox", label: "Draft scoring", title: "Score a draft budget" },
+  { slug: "plan", label: "Strategic plan", title: "Multi-year strategic plan" },
+  { slug: "strategy", label: "Strategy alignment", title: "National strategy alignment" },
 ] as const;
 
 /** Pages whose content does not depend on a single year. */
 const YEARLESS = new Set(["record", "scale"]);
+/** Pages that always start from the latest assessed year. */
+const LATEST = new Set(["plan", "strategy"]);
 
 export function CountryShell({ id, children }: { id: string; children: React.ReactNode }) {
   const { data: profile, error, isLoading, mutate } = useCountry(id);
@@ -94,8 +98,14 @@ export function CountryShell({ id, children }: { id: string; children: React.Rea
 
         {/* context bar: quoted figures belong on screen, not in a tooltip */}
         <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 border-y border-rule py-2.5 t-ui sm:flex sm:flex-wrap">
-          <Ctx label="Assessment year" value={YEARLESS.has(slug) ? `${years[0] ?? ""}–${latest}` : year} />
-          <Ctx label="Budget envelope" value={yr ? fmtMoney(yr.envelope, profile?.currency) : "n/a"} />
+          <Ctx
+            label={LATEST.has(slug) ? "Base year" : "Assessment year"}
+            value={YEARLESS.has(slug) ? `${years[0] ?? ""}–${latest}` : LATEST.has(slug) ? latest : year}
+          />
+          <Ctx label="Budget envelope" value={(() => {
+            const e = LATEST.has(slug) ? profile?.years[profile.years.length - 1] : yr;
+            return e ? fmtMoney(e.envelope, profile?.currency) : "n/a";
+          })()} />
           <Ctx label="Data vintage" value={profile ? `${profile.kind === "synthetic" ? "Synthetic" : "Custom"}, ${vintage}` : "n/a"} />
           <Ctx label="Model version" value={health ? `v${health.version}, ${health.engine} engine` : "n/a"} />
         </dl>
@@ -104,7 +114,7 @@ export function CountryShell({ id, children }: { id: string; children: React.Rea
         <div className="mt-3 flex flex-wrap items-center gap-2" data-print-hide>
           {profile ? (
             <>
-              {!YEARLESS.has(slug) ? (
+              {!YEARLESS.has(slug) && !LATEST.has(slug) ? (
                 <Select
                   label="Year"
                   size="sm"

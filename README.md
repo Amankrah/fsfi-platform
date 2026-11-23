@@ -27,6 +27,7 @@ fsfi-platform/
     fsfi_platform/
       engine/          reference.py (port of the published equations), kkt.py, rust.py (adapter), get_engine()
       assessment.py    one-year assessment, record, scale curves, weights, draft scoring, Fisher–Jenks calibration
+      planning.py      multi-year strategic plan and national strategy alignment (demonstration strategy)
       mapping/         line-level mapper + audited rules (budget line → indicator)
       synthetic.py     seeded generator of the four demo countries
       store.py         JSON-file store (data/countries/<id>.json)

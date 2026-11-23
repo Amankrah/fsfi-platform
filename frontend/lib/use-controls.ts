@@ -43,7 +43,7 @@ export function useControls(): Controls & {
 
   const query = useMemo(() => {
     const keep = new URLSearchParams();
-    for (const k of ["year", "weighting", "scenario", "response"]) {
+    for (const k of ["year", "weighting", "scenario", "response", "h", "tr", "g", "curve", "pace"]) {
       const v = sp.get(k);
       if (v) keep.set(k, v);
     }

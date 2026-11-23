@@ -14,7 +14,10 @@ import type {
   Framework,
   Health,
   MappingResult,
+  Plan,
+  PlanParams,
   ResponseForm,
+  StrategyReport,
   ScaleCurves,
   TimeSeries,
   Weighting,
@@ -157,6 +160,10 @@ export const api = {
     upload<MappingResult>(`/mapping/run${countryId ? `?country_id=${enc(countryId)}` : ""}`, file),
   importRecords: (file: File) => upload<YearRecord[]>("/import/records", file),
   evidence: () => request<Evidence>("/evidence"),
+  plan: (id: string, c: Partial<Controls>, p: PlanParams) =>
+    request<Plan>(`/countries/${enc(id)}/plan`, { query: { ...ctlQuery({ ...c, year: undefined }), ...p } }),
+  strategy: (id: string, c: Partial<Controls>, p: PlanParams) =>
+    request<StrategyReport>(`/countries/${enc(id)}/strategy`, { query: { ...ctlQuery({ ...c, year: undefined }), ...p } }),
 };
 
 export const downloads = {
@@ -241,6 +248,24 @@ export function useAllYearAssessments(id: string | undefined, years: string[] | 
   return useSWR<Assessment[]>(
     id && years && years.length ? ["assessments-all", id, years.join(","), c.weighting, c.scenario, c.response] : null,
     () => Promise.all(years!.map((y) => api.assessment(id!, { ...c, year: y }))),
+    base,
+  );
+}
+
+const planKey = (p: PlanParams) => [p.horizon, p.target_reduction, p.growth, p.curve, p.pace];
+
+export function usePlan(id: string | undefined, c: Partial<Controls>, p: PlanParams) {
+  return useSWR<Plan>(
+    id ? ["plan", id, c.weighting, c.scenario, c.response, ...planKey(p)] : null,
+    () => api.plan(id!, c, p),
+    base,
+  );
+}
+
+export function useStrategy(id: string | undefined, c: Partial<Controls>, p: PlanParams) {
+  return useSWR<StrategyReport>(
+    id ? ["strategy", id, c.weighting, c.scenario, c.response, ...planKey(p)] : null,
+    () => api.strategy(id!, c, p),
     base,
   );
 }

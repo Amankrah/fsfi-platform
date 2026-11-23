@@ -15,6 +15,7 @@ from fastapi.responses import JSONResponse, PlainTextResponse
 from . import assessment as A
 from . import evidence as EV
 from . import framework as FW
+from . import planning as PL
 from . import store
 from .engine import get_engine
 from .mapping import parse_budget_csv, run_mapping, template_csv
@@ -175,6 +176,31 @@ def country_scale(cid: str, weighting: str = "hybrid", scenario: str = "normal_o
 def country_weights(cid: str, year: Optional[str] = None, scenario: str = "normal_operations"):
     p = _get(cid)
     return A.weights_report(p, year, scenario)
+
+
+def _plan_params(horizon, target_reduction, target, growth, curve, pace):
+    return dict(horizon=horizon, target_reduction=target_reduction, target=target, growth=growth, curve=curve,
+                pace=pace)
+
+
+@app.get("/api/countries/{cid}/plan")
+def country_plan(cid: str, horizon: int = 5, target_reduction: float = 0.20, target: Optional[float] = None,
+                 growth: float = 0.05, curve: str = "smoothstep", pace: float = 1.0, weighting: str = "hybrid",
+                 scenario: str = "normal_operations", response: str = "exponential"):
+    """Multi-year strategic plan from the latest assessed year."""
+    p = _get(cid)
+    return PL.plan(p, weighting=weighting, scenario=scenario, response=response, key=store.cache_key(p),
+                   **_plan_params(horizon, target_reduction, target, growth, curve, pace))
+
+
+@app.get("/api/countries/{cid}/strategy")
+def country_strategy(cid: str, horizon: int = 5, target_reduction: float = 0.20, target: Optional[float] = None,
+                     growth: float = 0.05, curve: str = "smoothstep", pace: float = 1.0, weighting: str = "hybrid",
+                     scenario: str = "normal_operations", response: str = "exponential"):
+    """Alignment of the actual allocation, the optimum and the plan with the national strategy."""
+    p = _get(cid)
+    return PL.strategy_report(p, weighting, scenario, response, key=store.cache_key(p),
+                              plan_params=_plan_params(horizon, target_reduction, target, growth, curve, pace))
 
 
 @app.get("/api/countries/{cid}/budget-lines", response_model=BudgetLinesPage)
